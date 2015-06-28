@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="vagabond">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Vagabond</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
+    <script src="js/core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+	<div class="ui grid">
+		<div class="center aligned one column row">
+			<div class="column">
+				<div class="ui segment">
+					<h1>Vagabond <span class="">{{ todos.length }}</span></h1>
+
+
+					<!-- TODO LIST -->
+					<div id="todo-list" class="row">
+					    <div class="col-sm-4 col-sm-offset-4">
+
+					        <div class="checkbox" ng-repeat="todo in todos">
+					            <label>
+					                <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+					            </label>
+					        </div>
+
+					    </div>
+					</div>
+
+					<div class="ui action input">
+					  <input type="text" placeholder="I want to go to..." ng-model="formData.text">
+					  <button type="submit" class="ui button" ng-click="createTodo()">Add</button>
+					</div>  
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+    
+
+</body>
+</html>
