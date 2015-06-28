@@ -2,7 +2,7 @@
   "name"         : "Vagabond",
   "version"      : "0.0.0",
   "description"  : "",
-  "main"         : "server.js",
+  "main"         : "app.js",
   "dependencies" : {
     "express"    : "~4.7.2",
     "mongoose"   : "~3.6.2",
