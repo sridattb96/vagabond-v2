@@ -17,49 +17,49 @@ app.use(methodOverride());
 
 var Schema = mongoose.Schema; 
 
-var TodoSchema = new Schema({
+var PlaceSchema = new Schema({
 	text : String 
 })
 
-var Todo = mongoose.model('Todo', TodoSchema);
+var Place = mongoose.model('Place', PlaceSchema);
 
-app.get('/api/todos', function(req, res) {
-	Todo.find(function(err, todos) {
+app.get('/api/places', function(req, res) {
+	Place.find(function(err, places) {
 		if (err) {
 			res.send(err);
 		}
-		res.json(todos);
+		res.json(places);
 	})
 })
 
-app.post('/api/todos', function(req, res) {
-	Todo.create({
+app.post('/api/places', function(req, res) {
+	Place.create({
 		text : req.body.text, 
 		done : false
-	}, function(err, todo) {
+	}, function(err, place) {
 		if (err) {
 			res.send(err);
 		}
-		Todo.find(function(err, todos) {
+		Place.find(function(err, places) {
 			if (err) 
 				res.send(err)
-			res.json(todos); 
+			res.json(places); 
 		})
 	})
 });
 
-app.delete('/api/todos/:todo_id', function(req,res){
-	Todo.remove({
-		_id : req.params.todo_id
-	}, function(err, todo) {
+app.delete('/api/places/:place_id', function(req,res){
+	Place.remove({
+		_id : req.params.place_id
+	}, function(err, place) {
 		if (err) {
 			res.send(err);
 		}
-		Todo.find(function(err, todos) {
+		Place.find(function(err, places) {
 			if (err) {
 				res.send(err);
 			}
-			res.json(todos);
+			res.json(places);
 		})
 	})
 })
@@ -68,5 +68,5 @@ app.get('*', function(req, res) {
     res.sendfile('./public/index.html'); 
 });
 
-app.listen(8080); 
-console.log("App listening on port 8080");
+app.listen(8081); 
+console.log("App listening on port 8081");
