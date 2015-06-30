@@ -2,11 +2,11 @@ var config = require('./config'),
     mongoose = require('mongoose');
 
 module.exports = function() {
-  var db = mongoose.connect(config.db);
+  	var db = mongoose.createConnection(config.db);
 
-  require('../app/models/place')
-  require('../app/models/user')
+  	require('../app/models/place')
+  	require('../app/models/user')
 
-  return db;
+  	return db;
 };
 
