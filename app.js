@@ -1,27 +1,36 @@
-var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var express = require('express'),
+	app = express(),
+	bodyParser = require('body-parser'),
+	config = require('./config/config'),
+	mongoose = require('./config/mongoose')(), // because of mongoose.js exporting the function
+	morgan = require('morgan'),
+	methodOverride = require('method-override'),
+	// passport = require('./config/passport')(), // same as mongoose issue
+	session = require('express-session');
 
-mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 app.use(express.static(__dirname + '/public'));
 
-app.use(morgan('dev'));                                         // log every request to the console
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+} else if (process.env.NODE_ENV === 'production') {
+	app.use(compress());
+}
+
+
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+// app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-var Schema = mongoose.Schema; 
+app.use(session({
+	saveUninitialized: true,
+	resave: true,
+	secret: config.sessionSecret
+}))
 
-var PlaceSchema = new Schema({
-	text : String 
-})
-
-var Place = mongoose.model('Place', PlaceSchema);
+var Place = mongoose.model('Place');
 
 app.get('/api/places', function(req, res) {
 	Place.find(function(err, places) {
@@ -65,7 +74,11 @@ app.delete('/api/places/:place_id', function(req,res){
 })
 
 app.get('*', function(req, res) {
-    res.sendfile('./public/index.html'); 
+	// if (req.session.lastVisit) {
+ //    	console.log(req.session.lastVisit);
+ //    }
+ //    req.session.lastVisit = new Date(); 
+    res.send('./public/index.html'); 
 });
 
 app.listen(8081); 
