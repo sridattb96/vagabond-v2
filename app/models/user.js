@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema; 
 
 var UserSchema = new Schema({
+	facebookId : Number, 
 	firstName : String,
 	lastName : String,
 	age : Number,
@@ -9,7 +10,7 @@ var UserSchema = new Schema({
 	city: String,
 	state : String,
 	biography: String,
-	interests: String,
-})
+	interests: String
+});
 
 var User = mongoose.model('User', UserSchema);

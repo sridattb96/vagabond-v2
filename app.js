@@ -10,8 +10,6 @@ var express = require('express'),
 	passport = require('passport'),
 	FacebookStrategy = require('passport-facebook').Strategy;
 
-var currentUser; 
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 app.use(express.static(__dirname + '/public'));
@@ -75,15 +73,24 @@ app.get('/auth/facebook',
 
   });
 
+var User = mongoose.model('User');
+
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    console.log(req.user);
-    currentUser = req.user; 
+  function(req, res) { 
 
-    res.redirect('/main.html');;
+  
+
+    // Successful authentication, redirect home.
+    // User.create({ 
+    // 	facebookId : req.user.id
+    // }, function(err, user) {
+    // 	// 
+    // });
+
+    res.redirect('/main.html');
   });
+  
 
 app.get('/logout', function(req, res){
   req.logout();
@@ -96,9 +103,14 @@ app.get('/main', function(req, res) {
 })
 
 app.get('/api/loginInfo', function(req, res) {
-	console.log(req.user); 
-	res.send(req.user);
-})
+	// User.find(function (err, users) {
+	// 	if (err) {
+	// 		res.send(err);
+	// 	}
+	// 	res.json(users);
+	// });
+	res.send(req.user); 
+});
 
 //-----------
 
