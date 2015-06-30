@@ -6,9 +6,11 @@ var express = require('express'),
 	morgan = require('morgan'),
 	methodOverride = require('method-override'),
 	// passport = require('./config/passport')(), // same as mongoose issue
-	session = require('express-session');
-	passport = require('passport')
-	FacebookStrategy = require('passport-facebook').Strategy
+	session = require('express-session'),
+	passport = require('passport'),
+	FacebookStrategy = require('passport-facebook').Strategy;
+
+var currentUser; 
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -52,7 +54,6 @@ passport.use(new FacebookStrategy({
     //   return done(err, user); //user record stored in database
     // });
 	process.nextTick(function (){
-		console.log(profile);
 		return done(null, profile);
 	});
   }
@@ -60,6 +61,14 @@ passport.use(new FacebookStrategy({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/', function(req, res) {
+	// if (req.session.lastVisit) {
+ //    	console.log(req.session.lastVisit);
+ //    }
+ //    req.session.lastVisit = new Date(); 
+    res.sendfile('./public/login.html'); 
+});
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'), function(req, res){
@@ -70,14 +79,26 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    console.log('authenticated');
-    res.redirect('/');
+    console.log(req.user);
+    currentUser = req.user; 
+
+    res.redirect('/main.html');;
   });
 
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+app.get('/main', function(req, res) {
+	
+	res.send('./public/main.html');
+})
+
+app.get('/api/loginInfo', function(req, res) {
+	console.log(req.user); 
+	res.send(req.user);
+})
 
 //-----------
 
@@ -123,14 +144,6 @@ app.delete('/api/places/:place_id', function(req,res){
 		})
 	})
 })
-
-app.get('*', function(req, res) {
-	// if (req.session.lastVisit) {
- //    	console.log(req.session.lastVisit);
- //    }
- //    req.session.lastVisit = new Date(); 
-    res.send('./public/index.html'); 
-});
 
 app.listen(8081); 
 console.log("App listening on port 8081");

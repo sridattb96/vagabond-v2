@@ -1,4 +1,4 @@
-var vagabond = angular.module('vagabond', []);
+var feed = angular.module('feed', []);
 
 function mainController($scope, $http) {
     $scope.formData = {};
@@ -35,6 +35,14 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
+
+    $http.get('/api/loginInfo') 
+        .success(function(data) {
+            $scope.loginInfo = data; 
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
 
 }
 

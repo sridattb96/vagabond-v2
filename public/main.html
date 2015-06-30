@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="vagabond">
+<html ng-app="feed">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
-    <script src="js/controllers.js"></script>
+    <script src="js/feed.js"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -49,16 +49,6 @@
 					  <div class="ui green button" ng-click="createPlace()">Add</div>
 					</div>
 
-					<br>
-					<br>
-
-					<div class="ui primary button">
-					  <i style="color: white;" class="fa fa-facebook"></i><a style="color: white" href="/auth/facebook">Login with Facebook</a>
-					  <!-- <a style="color: white" href="#" onclick="checkLoginState();">Login with Facebook</a> -->
-					</div>
-
-					<br>
-					<br>
 
 					<h1>Feed</h1>
 					<ul class="feed">
@@ -69,12 +59,11 @@
 							
 						</li>
 					</ul>
-					<a href="/auth/facebook"> login </a>	
+
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-	</script>
 </body>
 </html>
