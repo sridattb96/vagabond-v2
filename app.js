@@ -7,6 +7,8 @@ var express = require('express'),
 	methodOverride = require('method-override'),
 	// passport = require('./config/passport')(), // same as mongoose issue
 	session = require('express-session');
+	passport = require('passport')
+	FacebookStrategy = require('passport-facebook').Strategy
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -29,6 +31,56 @@ app.use(session({
 	resave: true,
 	secret: config.sessionSecret
 }))
+
+//---------passport facebook login
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(new FacebookStrategy({
+    clientID: 886471691414676,
+    clientSecret: "4aeb8bae912f2de14a64e685f7ec59a0",
+    callbackURL: "http://localhost:8081/auth/facebook/callback",
+    enableProof: false
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    //   return done(err, user); //user record stored in database
+    // });
+	process.nextTick(function (){
+		console.log(profile);
+		return done(null, profile);
+	});
+  }
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'), function(req, res){
+
+  });
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    console.log('authenticated');
+    res.redirect('/');
+  });
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+//-----------
 
 var Place = mongoose.model('Place');
 
