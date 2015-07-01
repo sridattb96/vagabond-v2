@@ -31,10 +31,38 @@ module.exports = function(app) {
 	app.get('/auth/facebook/callback',
 	  passport.authenticate('facebook', { failureRedirect: '/login' }),
 	  function(req, res) { 
+	  	console.log(req.user);
 
 	  
 
 	    // Successful authentication, redirect home.
+	    User.findOne({ facebookId : req.user.id }, function (err, user) {
+	    	if (err) {
+	    		return next(err); 
+	    	}
+	    	else {
+	    		if (! user) {
+	    			console.log('NEW USER NOT FOUND IN DB, ADDING HIM / HER');
+	    			var newUser = new User({
+	    				facebookId : req.user.id,
+	    				firstName : req.user.first_name,
+	    				lastName : req.user.last_name,
+	    				age: 10,
+	    				gender : req.user.gender,
+	    				city: "",
+	    				state: "",
+	    				biography: "",
+	    				interests: ""
+	    			});
+	    			newUser.save(function(err) {
+	    				if (err) {
+	    					console.log('ERROR SAVING NEW USER');
+	    				}
+	    			})
+
+	    		}
+	    	}
+	    })
 	    // User.create({ 
 	    // 	facebookId : req.user.id
 	    // }, function(err, user) {
@@ -56,13 +84,16 @@ module.exports = function(app) {
 	})
 
 	app.get('/api/loginInfo', function(req, res) {
-		// User.find(function (err, users) {
-		// 	if (err) {
-		// 		res.send(err);
-		// 	}
-		// 	res.json(users);
-		// });
 		res.send(req.user); 
+	});
+
+	app.get('/api/users', function(req, res) {
+		User.find({}, function(err, users) {
+			if (err) {
+				res.send(err);
+			}
+			res.json(users);
+		});
 	});
 
 	//-----------
