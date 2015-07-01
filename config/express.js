@@ -40,7 +40,7 @@ module.exports = function() {
 	}));
 
 	// Set the application view engine and 'views' folder
-	app.set('views', './app/views');
+	// app.set('views', './app/views');
 	// app.set('view engine', 'html');
 
 	//---------passport facebook login
