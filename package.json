@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "body-parser": "~1.5.2",
+    "ejs": "^2.3.2",
     "express": "~4.7.2",
     "express-session": "~1.7.6",
     "method-override": "~2.1.2",

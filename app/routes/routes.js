@@ -18,7 +18,8 @@ module.exports = function(app) {
 	 //    	console.log(req.session.lastVisit);
 	 //    }
 	 //    req.session.lastVisit = new Date(); 
-	    res.sendfile('./public/login.html'); 
+	    // res.sendfile('./public/login.html'); 
+	    res.render('login.html')
 	});
 
 	app.get('/auth/facebook',
@@ -68,8 +69,8 @@ module.exports = function(app) {
 	    // }, function(err, user) {
 	    // 	// 
 	    // });
-
-	    res.redirect('/main.html');
+		res.redirect('/main');
+	    // res.redirect('/main.html');
 	  });
 	  
 
@@ -79,8 +80,9 @@ module.exports = function(app) {
 	});
 
 	app.get('/main', function(req, res) {
+		res.render('main.html');
 		
-		res.send('./public/main.html');
+		// res.send('./public/main.html');
 	})
 
 	app.get('/api/loginInfo', function(req, res) {

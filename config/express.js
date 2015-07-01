@@ -40,8 +40,8 @@ module.exports = function() {
 	}));
 
 	// Set the application view engine and 'views' folder
-	// app.set('views', './app/views');
-	// app.set('view engine', 'html');
+	app.set('views', './app/views');
+	app.engine('html', require('ejs').renderFile);
 
 	//---------passport facebook login
 	passport.serializeUser(function(user, done) {
