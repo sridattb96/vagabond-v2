@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="lib/semantic-ui/dist/components/reset.css">
     <link rel="stylesheet" href="lib/semantic-ui/dist/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/dropdown.css">
-    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/menu.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/menu.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/card.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/grid.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/site.min.css">
+
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     
@@ -18,72 +22,175 @@
     <script type="text/javascript" src="lib/semantic-ui/dist/components/dropdown.js"></script>
     <script src="js/main.js"></script>
 
+    <style>
+    #banner-container {
+    	background: url('https://download.unsplash.com/photo-1428263197823-ce6a8620d1e1');
+    	background-size: cover;
+    	padding-top: 5.5em;
+    }
+    .ui.text.container {
+      max-width: 950px !important;
+    }
+
+    div.ui.borderless.main.menu {
+    	background-color: transparent;
+    }
+    .ui.borderless.main.menu.fixed {
+    	background-color: white;
+    }
+    
+    .main.menu {
+      margin-top: 4em;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      transition:
+        box-shadow 1s ease-in-out,
+        padding 1s ease-in-out,
+        background 0.25s ease-in-out
+      ;
+    }
+    .main.menu .item img.logo {
+      margin-right: 1.5em;
+    }
+
+    .main.menu.fixed {
+      background-color: #FFFFFF;
+      border: 1px solid #DDD;
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+    </style>
+
 </head>
 <body ng-controller="mainController">
-	<div class="ui grid">
-		<div class="center aligned one column row">
-			<div class="column">
-				<div class="ui segment">
-					
-					
-					<div ng-include src="'partials/navbar.html'"></div>
 
-					
+	
 
+	<div id="banner-container">
 
-					<h1>Number of Places: <span class="">{{ places.length }}</span></h1>
-					<form class="ui form" id="userform">
-					    <div class="field">
-					      <div class="three fields">
-					        <div class="field">
-					          <input type="text" ng-model="place.name" placeholder="Place"> 
-					        </div>
-					        <div class="field">
-					          <input type="text" ng-model="place.reason" placeholder="Why">
-					        </div>
-					        <div ng-click="addPlace()" class="ui submit button">Add</div> 
-					      </div>
-
-					  </div>
-					  
-					</form>
-					<div class="ui action left icon input">
-					  <i class="search icon"></i>
-					  <input type="text" placeholder="Filter..." ng-model="query">
-					</div>
+		<div class="ui main text container">
+		  <h1 class="ui header">Feed</h1>
+		  <p>This example shows how to use lazy loaded images, a sticky menu, and a simple text container</p>
+		  <br>
+		  <br>
+		</div>
 
 
-					<br>
-
-					<h1>Feed</h1>
-
-					<div class="ui cards" ng-repeat="place in places | filter: query">
-					  <div class="card">
-					    <div class="content">
-					      <img class="right floated mini ui image" src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=25&width=25">
-					      <div class="header">
-					        {{ place.requester.name }}
-					      </div>
-					      <div class="meta">
-					        Friends of Veronika
-					      </div>
-					      <div class="description">
-					        {{ place.reason }}
-					      </div>
-					    </div>
-					    <div class="extra content">
-					      <div class="ui two buttons">
-					        <div class="ui basic green button">Approve</div>
-					        <div class="ui basic red button">Decline</div>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-
-					
-				</div>
-			</div>
+		<div class="ui borderless main menu">
+		  <div class="ui text container">
+		    <div href="#" class="header item">
+		      <img class="logo" src="assets/images/logo.png">
+		      Vagabond
+		    </div>
+		    <a href="#" class="item">Home</a>
+		    <div class="right menu">
+		      <div class="item">
+		        <div class="ui action left icon input">
+		          <i class="search icon"></i>
+		          <input type="text" placeholder="Search" ng-model="query">
+		          <button class="ui button" disabled="">Add</button>
+		        </div>
+		      </div>
+		      <div class="ui dropdown item">
+		        <img src="https://graph.facebook.com/{{ loginInfo.id }}/picture?height=100&width=100"/> 
+		        &nbsp;
+		        {{ loginInfo.displayName }}
+		        <i class="dropdown icon"></i>
+		        <div class="menu">
+		          <a href=""><div class="item"><i class="users icon"></i> Requests</div></a>
+		          <a href="/profile"><div class="item"><i class="users icon"></i> Profile</div></a>
+		          <!-- <div class="divider"></div> -->
+		        </div>
+		      </div>
+		    </div>
+		    <!-- <a href="#" class="ui right floated dropdown item">
+		      Dropdown <i class="dropdown icon"></i>
+		      <div class="menu">
+		        <div class="item">Link Item</div>
+		        <div class="item">Link Item</div>
+		        <div class="divider"></div>
+		        <div class="header">Header Item</div>
+		        <div class="item">
+		          <i class="dropdown icon"></i>
+		          Sub Menu
+		          <div class="menu">
+		            <div class="item">Link Item</div>
+		            <div class="item">Link Item</div>
+		          </div>
+		        </div>
+		        <div class="item">Link Item</div>
+		      </div>
+		    </a> -->
+		  </div>
 		</div>
 	</div>
+
+	<br>
+
+	<div class="ui text  container">
+				
+		<!-- <div ng-include src="'partials/navbar.html'"></div> -->
+		<form class="ui form" id="userform">
+		    <div class="field">
+		      <div class="three fields">
+		        <div class="field">
+		          <input type="text" ng-model="place.name" placeholder="Place"> 
+		        </div>
+		        <div class="field">
+		          <input type="text" ng-model="place.reason" placeholder="Why">
+		        </div>
+		        <div ng-click="addPlace()" class="ui submit button">Add</div> 
+		        
+
+		      </div>
+
+		  </div>
+		  
+		</form>
+		<h1>Number of Places: <span class="">{{ (places | filter: query).length }}</span></h1>
+
+		<br>
+		
+		<div class="ui link cards" >
+		  <div class="card" ng-repeat="place in places | filter: query">
+		    <div class="image">
+		      <img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=400&width=400">
+		    </div>
+		    <div class="content">
+		      <div class="header">{{ place.requester.name }}</div>
+		      <div class="meta">
+		        <a>Friends</a>
+		      </div>
+		      <div class="description">
+		        {{ place.reason }}
+		      </div>
+		    </div>
+		    <div class="extra content">
+		      <span class="right floated">
+		        Time Since Posted
+		      </span>
+		      <span class="left floated">
+		        <i class="user icon"></i>
+		        Mutual Friends
+		      </span>
+		    </div>
+		  </div>
+		  
+		  
+		</div>
+		
+
+
+		<br>
+
+				
+
+				
+
+
+
+	</div>
+
+
 </body>
 </html>

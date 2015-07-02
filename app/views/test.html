@@ -7,215 +7,146 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properities -->
-  <title>Theming - Semantic</title>
-  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/semantic.min.css">
+  <title>Sticky Example - Semantic</title>
+
   <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/reset.css">
   <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/site.css">
-  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/grid.css">
 
-  <!--- Component CSS -->
+  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/container.css">
+  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/grid.css">
+  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/header.css">
+
   <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/menu.css">
-  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/input.css">
+
+  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/segment.css">
   <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/dropdown.css">
   <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/icon.css">
-  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/button.css">
   <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/transition.css">
 
-  <!--- Example Libs -->
-  <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/popup.css">
-
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script type="text/javascript" src="lib/semantic-ui/dist/components/popup.js"></script>
-
-  <!--- Component JS -->
-  <script type="text/javascript" src="lib/semantic-ui/dist/components/transition.js"></script>
-  <script type="text/javascript" src="lib/semantic-ui/dist/components/dropdown.js"></script>
-  
-
-  <style type="text/css">
-    body > .ui.container {
-      margin-top: 3em;
-    }
-    .ui.container > h1 {
-      font-size: 3em;
-      text-align: center;
-      font-weight: normal;
-    }
-    .ui.container > h2.dividing.header {
-      font-size: 2em;
-      font-weight: normal;
-      margin: 4em 0em 3em;
-    }
-    .ui.table {
-      table-layout: fixed;
-    }
-    body {
-        padding: 1em;
-      }
-      .ui.menu {
-        margin: 3em 0em;
-      }
-      .ui.menu:last-child {
-        margin-bottom: 110px;
-      }
-  </style>
-
-  <!--- Example Javascript -->
+  <script src="lib/semantic-ui/dist/components/transition.js"></script>
+  <script src="lib/semantic-ui/dist/components/dropdown.js"></script>
+  <script src="lib/semantic-ui/dist/components/visibility.js"></script>
   <script>
   $(document)
     .ready(function() {
-      $('.ui.menu .ui.dropdown').dropdown({
+      // fix main menu to page on passing
+      $('.main.menu').visibility({
+        type: 'fixed'
+      });
+        
+      // lazy load images
+     
+      // show dropdown on hover
+      $('.main.menu  .ui.dropdown').dropdown({
         on: 'hover'
       });
-      $('.ui.menu a.item')
-        .on('click', function() {
-          $(this)
-            .addClass('active')
-            .siblings()
-            .removeClass('active')
-          ;
-        })
-      ;
     })
   ;
   </script>
+
+  <style type="text/css">
+  .ui.text.container {
+    max-width: 950px !important;
+  }
+  
+  .main.container {
+    margin-top: 2em;
+  }
+  .main.menu {
+    margin-top: 4em;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    transition:
+      box-shadow 0.5s ease,
+      padding 0.5s ease
+    ;
+  }
+  .main.menu .item img.logo {
+    margin-right: 1.5em;
+  }
+
+  .main.menu.fixed {
+    background-color: #FFFFFF;
+    border: 1px solid #DDD;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  </style>
+
 </head>
 <body>
+  <div style="background-color: red; height: 200px; width: 100%; position: absolute; top: 0;"></div>
 
-<div class="ui container">
+  <div class="ui main text container">
+    <h1 class="ui header">Sticky Example</h1>
+    <p>This example shows how to use lazy loaded images, a sticky menu, and a simple text container</p>
+  </div>
+
+
+  <div class="ui borderless main menu">
+    <div class="ui text container">
+      <div href="#" class="header item">
+        <img class="logo" src="assets/images/logo.png">
+        Project Name
+      </div>
+      <a href="#" class="item">Blog</a>
+      <a href="#" class="item">Articles</a>
+      <a href="#" class="ui right floated dropdown item">
+        Dropdown <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item">Link Item</div>
+          <div class="item">Link Item</div>
+          <div class="divider"></div>
+          <div class="header">Header Item</div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            Sub Menu
+            <div class="menu">
+              <div class="item">Link Item</div>
+              <div class="item">Link Item</div>
+            </div>
+          </div>
+          <div class="item">Link Item</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="ui text container">
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <div class="overlay">
+      <div class="ui labeled icon vertical menu">
+        <a class="item"><i class="twitter icon"></i> Tweet</a>
+        <a class="item"><i class="facebook icon"></i> Share</a>
+        <a class="item"><i class="mail icon"></i> E-mail</a>
+      </div>
+    </div>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <img class="ui medium left floated image" data-src="assets/images/wireframe/square-image.png">
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+    <img class="ui medium right floated image" data-src="assets/images/wireframe/square-image.png">
+    Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <img class="ui medium left floated image" data-src="assets/images/wireframe/square-image.png">
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+    <img class="ui medium right floated image" data-src="assets/images/wireframe/square-image.png">
+    Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  </div>
+
   
-
-  <h2 class="ui dividing header">Menu</h2>
-  <div class="ui menu">
-    <div class="header item">Brand</div>
-    <a class="active item">Link</a>
-    <a class="item">Link</a>
-    <div class="ui dropdown item">
-      Dropdown
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <div class="item">Action</div>
-        <div class="item">Another Action</div>
-        <div class="item">Something else here</div>
-        <div class="divider"></div>
-        <div class="item">Separated Link</div>
-        <div class="divider"></div>
-        <div class="item">One more separated link</div>
-      </div>
-    </div>
-    <div class="right menu">
-      <div class="item">
-        <div class="ui action left icon input">
-          <i class="search icon"></i>
-          <input type="text" placeholder="Search">
-          <button class="ui button">Submit</button>
-        </div>
-      </div>
-      <a class="item">Link</a>
-    </div>
-  </div>
-
-  <div class="ui inverted menu">
-    <div class="header item">Brand</div>
-    <div class="active item">Link</div>
-    <a class="item">Link</a>
-    <div class="ui dropdown item">
-      Dropdown
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <div class="item">Action</div>
-        <div class="item">Another Action</div>
-        <div class="item">Something else here</div>
-        <div class="divider"></div>
-        <div class="item">Separated Link</div>
-        <div class="divider"></div>
-        <div class="item">One more separated link</div>
-      </div>
-    </div>
-    <div class="right menu">
-      <div class="item">
-        <div class="ui transparent inverted icon input">
-          <i class="search icon"></i>
-          <input type="text" placeholder="Search">
-        </div>
-      </div>
-      <a class="item">Link</a>
-    </div>
-  </div>
-
-  <div class="ui secondary menu">
-    <div class="active item">Link</div>
-    <a class="item">Link</a>
-    <div class="ui dropdown item">
-      Dropdown
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <div class="item">Action</div>
-        <div class="item">Another Action</div>
-        <div class="item">Something else here</div>
-        <div class="divider"></div>
-        <div class="item">Separated Link</div>
-        <div class="divider"></div>
-        <div class="item">One more separated link</div>
-      </div>
-    </div>
-    <div class="right menu">
-      <div class="item">
-        <div class="ui action left icon input">
-          <i class="search icon"></i>
-          <input type="text" placeholder="Search">
-          <button class="ui button">Submit</button>
-        </div>
-      </div>
-      <a class="item">Link</a>
-    </div>
-  </div>
-
-  <div class="ui three column doubling grid">
-    <div class="column">
-      <div class="ui secondary pointing menu">
-        <div class="active item">Link</div>
-        <a class="item">Link</a>
-        <a class="item">Link</a>
-      </div>
-    </div>
-
-    <div class="column">
-      <div class="ui tabular menu">
-        <div class="active item">Link</div>
-        <a class="item">Link</a>
-        <a class="item">Link</a>
-      </div>
-    </div>
-
-    <div class="column">
-      <div class="ui pointing menu">
-        <div class="active item">Link</div>
-        <a class="item">Link</a>
-        <div class="right item">
-          Right Text
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h2 class="ui dividing header">Buttons</h2>
-  <!-- <iframe src="components/button.html" width="100%" scrolling="no"></iframe> -->
-
-  <h2 class="ui dividing header">Table</h2>
-  <!-- <iframe src="components/table.html" width="100%" scrolling="no"></iframe> -->
-
-  <h2 class="ui dividing header">Input</h2>
-  <!-- <iframe src="components/input.html" width="100%" scrolling="no"></iframe> -->
-
-
-  <h2 class="ui dividing header">Card</h2>
-  <!-- <iframe src="components/card.html" width="100%" scrolling="no"></iframe> -->
-
-
-
-</div>
-
 </body>
 
 </html>

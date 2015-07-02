@@ -88,12 +88,13 @@ module.exports = function(app) {
 	});
 
 	app.get('/main', function(req, res) {
-		res.render('main.html', {
-			// picture: 'https://graph.facebook.com/' + req.user.id + '/picture?height=250&width=250'
-		});
-		
-		// res.send('./public/main.html');
-	})
+		if (req.user) {
+			res.render('main.html');
+		}
+		else {
+			res.render('login.html')
+		}
+	});
 
 	app.get('/api/loginInfo', function(req, res) {
 		res.send(req.user); 
@@ -140,19 +141,7 @@ module.exports = function(app) {
 				res.json(places); 
 			})
 		})
-		// Place.create({
-		// 	text : req.body.text, 
-		// 	done : false
-		// }, function(err, place) {
-		// 	if (err) {
-		// 		res.send(err);
-		// 	}
-		// 	Place.find(function(err, places) {
-		// 		if (err) 
-		// 			res.send(err)
-		// 		res.json(places); 
-		// 	})
-		// })
+		
 	});
 
 	app.delete('/api/places/:place_id', function(req,res){

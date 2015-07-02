@@ -58,7 +58,7 @@ function mainController($scope, $http) {
             console.log('Error: ' + data);
         });
 
-    $scope.$on('$includeContentLoaded', function () {
+    // $scope.$on('$includeContentLoaded', function () {
         // $('.masthead')
         //   .visibility({
         //     once: false,
@@ -87,7 +87,10 @@ function mainController($scope, $http) {
             ;
           })
         ;
-    });
+        $('.main.menu').visibility({
+          type: 'fixed'
+        });
+    // });
 
 
 
