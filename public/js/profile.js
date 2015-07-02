@@ -3,6 +3,16 @@ var profile = angular.module('profile', [])
 
 	$scope.master = {};
 
+	$http({
+		method: 'GET',
+		url: 'api/loginInfo',
+		data: {},
+	}).success(function(data){
+		var name = data.displayName.split(' ');
+		$scope.firstname = name[0];
+		$scope.lastname = name[1];
+	})
+
 	$scope.onSave = function(user){
 		$scope.master = angular.copy(user);
 		var userSaveData = $scope.user;
