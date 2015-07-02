@@ -4,6 +4,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 
     <script type="text/javascript" src="js/profile-edit.js"></script>
+
 <head>
 	<title>Vagabond | Edit Profile</title>
 </head>
@@ -17,10 +18,10 @@
 	      <label>Name</label>
 	      <div class="two fields">
 	        <div class="field">
-	          <input id="firstname" type="text" ng-model="user.firstName" name="first-name" placeholder="First Name"> {{ user.firstname }}
+	          <input id="firstname" type="text" disabled ng-model="user.firstName" name="first-name" placeholder="First Name"> {{ user.firstname }}
 	        </div>
 	        <div class="field">
-	          <input id="lastname" type="text" ng-model="user.lastName" name="last-name" placeholder="Last Name">
+	          <input id="lastname" type="text" disabled ng-model="user.lastName" name="last-name" placeholder="Last Name">
 	        </div>
 	      </div>
 	    </div>
@@ -33,9 +34,15 @@
 		      	<option value="other">Other</option>
 		      </select>
 	    </div>
+	    <div class="two fields">
+	    <div class="field">
+	    	<label>Email</label>
+	    	<input id="email" type="email" ng-model="user.email" name="email" placeholder="Email">
+	    </div>
 	    <div class="field">
 	    	<label>Age</label>
-	    	<input id="age" type="text" ng-model="user.age" name="age" placeholder="Age">
+	    	<input id="age" type="number" ng-model="user.age" name="age" placeholder="Age">
+	    </div>
 	    </div>
 	  </div>
 	  <label>Location</label>
@@ -111,7 +118,15 @@
 	    <textarea ng-model="user.interests"></textarea>
 	  </div>
 	  <div ng-click="onSave(user)" class="ui submit button">Save</div> {{user | json}} {{master | json}}
-
+	  
+	  <input type="checkbox" class="fire-check" />
+	  <button class="fire">Notify</button>
+	  <section>
+	  	<div class="tn-box tn-box-color-1">
+			<p>Your settings have been saved successfully!</p>
+			<div class="tn-progress"></div>
+		</div>
+	  </section>
 	</form>
 	</div>
 	</div>

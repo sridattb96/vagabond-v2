@@ -12,7 +12,6 @@ var profileEdit = angular.module('profile-edit', [])
 			fbid: data.id
 		}
 	
-		
 	});
 
 	$scope.onSave = function(user){
