@@ -6,24 +6,16 @@ var profile = angular.module('profile', [])
 		url: 'api/loginInfo',
 		data: {},
 	}).success(function(data){
+		console.log("FIRSTNAME = " + data._json.first_name);
 		$scope.user = {
 			firstName: data._json.first_name,
 			lastName: data._json.last_name,
-			fbid = data.id
+			id: data.id
+
 		}
-	
-		
 	});
 
-	$scope.onSave = function(user){
-		var userSaveData = $scope.user;
-		var fbid = $scope.user.fbid;
-		$http({
-			method: 'PUT',
-			url: '/api/saveInfo/' + fbid,
-			data: userSaveData
-		}).success(function(data){
-			console.log(data);
-		})
-	};
+
+
+	
 }]);
