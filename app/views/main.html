@@ -1,21 +1,21 @@
 <!doctype html>
-<html ng-app="feed">
+<html ng-app="main">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Vagabond</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.css"> -->
+    <link rel="stylesheet" href="lib/semantic-ui/dist/components/reset.css">
     <link rel="stylesheet" href="lib/semantic-ui/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/menu.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
-    <script src="js/feed.js"></script>
+    <script type="text/javascript" src="lib/semantic-ui/dist/components/dropdown.js"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -24,31 +24,61 @@
 		<div class="center aligned one column row">
 			<div class="column">
 				<div class="ui segment">
-					<div ng-include="" src="'partials/navbar.html'"></div>
+					
+					
+					<div ng-include src="'partials/navbar.html'"></div>
+
+					
+
+
 					<h1>Number of Places: <span class="">{{ places.length }}</span></h1>
+					<form class="ui form" id="userform">
+					    <div class="field">
+					      <div class="three fields">
+					        <div class="field">
+					          <input type="text" ng-model="place.name" placeholder="Place"> 
+					        </div>
+					        <div class="field">
+					          <input type="text" ng-model="place.reason" placeholder="Why">
+					        </div>
+					        <div ng-click="addPlace()" class="ui submit button">Add</div> 
+					      </div>
 
-					<br>
-
+					  </div>
+					  
+					</form>
 					<div class="ui action left icon input">
 					  <i class="search icon"></i>
 					  <input type="text" placeholder="Filter..." ng-model="query">
 					</div>
 
-					<div class="ui action input">
-					  <input type="text" placeholder="Add a place..." ng-model="formData.text">
-					  <div class="ui green button" ng-click="createPlace()">Add</div>
-					</div>
 
+					<br>
 
 					<h1>Feed</h1>
-					<ul class="feed">
-						<li ng-repeat="place in places | filter: query">
-							<label>
-				                <input type="checkbox" ng-click="deletePlace(place._id)"> {{ place.text }}
-				            </label>
-							
-						</li>
-					</ul>
+
+					<div class="ui cards" ng-repeat="place in places | filter: query">
+					  <div class="card">
+					    <div class="content">
+					      <img class="right floated mini ui image" src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=25&width=25">
+					      <div class="header">
+					        {{ place.requester.name }}
+					      </div>
+					      <div class="meta">
+					        Friends of Veronika
+					      </div>
+					      <div class="description">
+					        {{ place.reason }}
+					      </div>
+					    </div>
+					    <div class="extra content">
+					      <div class="ui two buttons">
+					        <div class="ui basic green button">Approve</div>
+					        <div class="ui basic red button">Decline</div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 
 					
 				</div>

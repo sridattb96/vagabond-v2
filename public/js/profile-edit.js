@@ -1,4 +1,4 @@
-var profileedit = angular.module('profileedit', [])
+var profileEdit = angular.module('profile-edit', [])
 .controller('ProfileEditController', ['$scope', '$http', function($scope, $http){
 	$('#saveMsg').hide();
 
