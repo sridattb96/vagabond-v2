@@ -42,6 +42,7 @@ module.exports = function() {
 	// Set the application view engine and 'views' folder
 	app.set('views', './app/views');
 	app.engine('html', require('ejs').renderFile);
+	app.engine('ejs', require('ejs').renderFile);
 
 	//---------passport facebook login
 	passport.serializeUser(function(user, done) {
@@ -62,6 +63,8 @@ module.exports = function() {
 	    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
 	    //   return done(err, user); //user record stored in database
 	    // });
+		console.log(profile);
+		// console.log("access token = " + accessToken); 
 		process.nextTick(function (){
 			return done(null, profile);
 		});

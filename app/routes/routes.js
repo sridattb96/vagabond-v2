@@ -23,31 +23,30 @@ module.exports = function(app) {
 	});
 
 	app.get('/auth/facebook',
-	  passport.authenticate('facebook'), function(req, res){
+	  passport.authenticate('facebook', { scope: ['user_likes', 'user_friends'] }), function(req, res){
 
 	  });
 
 	var User = mongoose.model('User');
 
 	app.get('/auth/facebook/callback',
-	  passport.authenticate('facebook', { failureRedirect: '/login' }),
+	  passport.authenticate('facebook', { failureRedirect: '/login'}),
 	  function(req, res) { 
-	  	console.log(req.user);
 
 	  
 
 	    // Successful authentication, redirect home.
 	    User.findOne({ facebookId : req.user.id }, function (err, user) {
 	    	if (err) {
-	    		return next(err); 
+	    		return next(err); 	
 	    	}
 	    	else {
 	    		if (! user) {
 	    			console.log('NEW USER NOT FOUND IN DB, ADDING HIM / HER');
 	    			var newUser = new User({
 	    				facebookId : req.user.id,
-	    				firstName : req.user.first_name,
-	    				lastName : req.user.last_name,
+	    				firstName : req.user._json["first_name"],
+	    				lastName : req.user._json["last_name"],
 	    				age: 10,
 	    				gender : req.user.gender,
 	    				city: "",
@@ -70,7 +69,6 @@ module.exports = function(app) {
 	    // 	// 
 	    // });
 		res.redirect('/main');
-	    // res.redirect('/main.html');
 	  });
 	  
 
@@ -80,7 +78,9 @@ module.exports = function(app) {
 	});
 
 	app.get('/main', function(req, res) {
-		res.render('main.html');
+		res.render('main.ejs', {
+			picture: 'https://graph.facebook.com/' + req.user.id + '/picture?height=350&width=250'
+		});
 		
 		// res.send('./public/main.html');
 	})
@@ -89,7 +89,7 @@ module.exports = function(app) {
 		res.send(req.user); 
 	});
 
-	app.get('/api/users', function(req, res) {
+	app.get('/api/users', function(req, res) {	
 		User.find({}, function(err, users) {
 			if (err) {
 				res.send(err);
