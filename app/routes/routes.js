@@ -221,4 +221,22 @@ module.exports = function(app) {
 			}
 		})
 	})
+
+	//find users that match desired locations
+	/*
+	app.get('/api/createFeed/:id', function(req, res){
+		User.findOne({facebookId: req.params.id}, function(err, user){
+			if (err)
+				console.log(err)
+			else {
+				if (!user)
+					console.log('you dont exist')
+				else {
+					//loop through every element of user's place list and every other person's placelist??
+					//something more efficient
+				}
+			}
+		})
+	})
+	*/
 };
