@@ -142,4 +142,32 @@ module.exports = function(app) {
 			})
 		})
 	})
+
+	//user profile information
+
+	app.put('/api/saveInfo/:id', function(req, res){
+		console.log('get it in')
+		User.findOne({id: req.params.id}, function(err, data){
+			if (err) {
+				console.log(err)
+			} else {
+				if (!data){
+					console.log('you dont exist')
+				} else {
+					User.update({id: req.params.id}, { 
+						$set: {
+							age : req.body.age,
+							gender : req.body.gender,
+							city : req.body.city,
+							state : req.body.state,
+							biography : req.body.biography,
+							interests : req.body.interests
+						} 
+					}, function(err, data){
+						console.log(data);
+					})
+				}
+			}
+		})
+	})
 };
