@@ -145,29 +145,73 @@ module.exports = function(app) {
 
 	//user profile information
 
+	app.get('/profile', function(req, res){
+		res.render('profile.html');
+	});
+
+	// app.put('/api/saveInfo/:id', function(req, res){
+	// 	console.log('req.body')
+	// 	User.findOne({ facebookId: req.params.id}, function(err, data){
+	// 		if (err) {
+	// 			console.log(err)
+	// 		} else {
+	// 			if (data == null){
+	// 				console.log('you dont exist')
+	// 			} else {
+	// 				User.update({ facebookId: req.params.id}, { 
+	// 					$set: {
+	// 						"age" : req.body.age,
+	// 						"gender" : req.body.gender,
+	// 						"city" : req.body.city,
+	// 						"state" : req.body.state,
+	// 						"biography" : req.body.biography,
+	// 						"interests" : req.body.interests
+	// 					} 
+	// 				}, {upsert: false}, function(err, data){
+	// 					console.log(data);
+	// 				})
+	// 			}
+	// 		}
+	// 	})
+	// })
+	
 	app.put('/api/saveInfo/:id', function(req, res){
-		console.log('get it in')
-		User.findOne({id: req.params.id}, function(err, data){
-			if (err) {
-				console.log(err)
-			} else {
-				if (!data){
-					console.log('you dont exist')
-				} else {
-					User.update({id: req.params.id}, { 
-						$set: {
-							age : req.body.age,
-							gender : req.body.gender,
-							city : req.body.city,
-							state : req.body.state,
-							biography : req.body.biography,
-							interests : req.body.interests
-						} 
-					}, function(err, data){
-						console.log(data);
-					})
+		console.log('req.body')
+		User.findOne({ facebookId: req.params.id}, function(err, user){
+			if (err)
+				console.log(err);
+			else {
+				if (! user) {
+					console.log('you dont exist');
+				}
+				else {
+					user.age = req.body.age;
+					user.gender = req.body.gender;
+					user.city = req.body.city;
+					user.state = req.body.state;
+					user.biography = req.body.biography;
+					user.interests = req.body.interests;
+
+					user.save();
 				}
 			}
-		})
-	})
+			console.log(user);
+		});
+	});
+
+	// app.put('/api/saveInfo/:id', function(req, res){
+	// 	console.log('req.body')
+	// 	User.findOneAndUpdate({ facebookId: req.params.id}, {
+	// 		$set: {
+	// 			age : req.body.age,
+	// 			gender : req.body.gender,
+	// 			city : req.body.city,
+	// 			state : req.body.state,
+	// 			biography : req.body.biography,
+	// 			interests : req.body.interests
+	// 		} 
+	// 	}, {upsert: false}, function(err, data){
+	// 		console.log(data);
+	// 	});
+	// });
 };

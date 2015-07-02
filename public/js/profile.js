@@ -5,6 +5,8 @@ var profile = angular.module('profile', [])
 
 	$scope.onSave = function(user){
 		$scope.master = angular.copy(user);
+		var userSaveData = $scope.user;
+		console.log(userSaveData);
 		$http({
 			method: 'GET',
 			url: 'api/loginInfo',
@@ -14,7 +16,7 @@ var profile = angular.module('profile', [])
 			$http({
 				method: 'PUT',
 				url: '/api/saveInfo/' + profileData.id,
-				data: { user: user }
+				data: userSaveData
 			}).success(function(data){
 				console.log('youve saved');
 				console.log(data);
