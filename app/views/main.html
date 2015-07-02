@@ -30,30 +30,55 @@
 
 					
 
+
 					<h1>Number of Places: <span class="">{{ places.length }}</span></h1>
+					<form class="ui form" id="userform">
+					    <div class="field">
+					      <div class="three fields">
+					        <div class="field">
+					          <input type="text" ng-model="place.name" placeholder="Place"> 
+					        </div>
+					        <div class="field">
+					          <input type="text" ng-model="place.reason" placeholder="Why">
+					        </div>
+					        <div ng-click="addPlace()" class="ui submit button">Add</div> 
+					      </div>
 
-					<br>
-
+					  </div>
+					  
+					</form>
 					<div class="ui action left icon input">
 					  <i class="search icon"></i>
 					  <input type="text" placeholder="Filter..." ng-model="query">
 					</div>
 
-					<div class="ui action input">
-					  <input type="text" placeholder="Add a place..." ng-model="formData.text">
-					  <div class="ui green button" ng-click="createPlace()">Add</div>
-					</div>
 
+					<br>
 
 					<h1>Feed</h1>
-					<ul class="feed">
-						<li ng-repeat="place in places | filter: query">
-							<label>
-				                <input type="checkbox" ng-click="deletePlace(place._id)"> {{ place.text }}
-				            </label>
-							
-						</li>
-					</ul>
+
+					<div class="ui cards" ng-repeat="place in places | filter: query">
+					  <div class="card">
+					    <div class="content">
+					      <img class="right floated mini ui image" src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=25&width=25">
+					      <div class="header">
+					        {{ place.requester.name }}
+					      </div>
+					      <div class="meta">
+					        Friends of Veronika
+					      </div>
+					      <div class="description">
+					        {{ place.reason }}
+					      </div>
+					    </div>
+					    <div class="extra content">
+					      <div class="ui two buttons">
+					        <div class="ui basic green button">Approve</div>
+					        <div class="ui basic red button">Decline</div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 
 					
 				</div>

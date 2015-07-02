@@ -1,29 +1,43 @@
 var main = angular.module('main', []);
 
 function mainController($scope, $http) {
-    $scope.formData = {};
+    $scope.placeData = {};
 
     $http.get('/api/places')
         .success(function(data) {
             $scope.places = data;
+            console.log("PLACES DATA IS HERE vvv")
             console.log(data);
         })
         .error(function(data) {
             console.log('Error: ' + data);
         });
 
-
-    $scope.createPlace = function() {
-        $http.post('/api/places', $scope.formData)
-            .success(function(data) {
-                $scope.formData = {}; 
-                $scope.places = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
+    $scope.addPlace = function(){
+        var placeData = $scope.place;
+        $http({
+            method: 'POST',
+            url: '/api/places',
+            data: placeData
+        }).success(function(data){
+            $scope.places = data; 
+            placeData = {};
+            console.log(data);
+        })
     };
+
+
+    // $scope.createPlace = function() {
+    //     $http.post('/api/places', $scope.formData)
+    //         .success(function(data) {
+    //             $scope.formData = {}; 
+    //             $scope.places = data;
+    //             console.log(data);
+    //         })
+    //         .error(function(data) {
+    //             console.log('Error: ' + data);
+    //         });
+    // };
 
     $scope.deletePlace = function(id) {
         $http.delete('/api/places/' + id)
@@ -60,7 +74,7 @@ function mainController($scope, $http) {
         // $('.ui.sidebar')
         //   .sidebar('attach events', '.toc.item')
         // ;
-        
+
         $('.ui.menu .ui.dropdown').dropdown({
           on: 'hover'
         });

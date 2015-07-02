@@ -123,7 +123,12 @@ module.exports = function(app) {
 
 	app.post('/api/places', function(req, res) {
 		Place.create({
-			text : req.body.text, 
+			name : req.body.name, 
+			reason : req.body.reason,
+			requester : {
+				name : req.user.displayName,
+				facebookId : req.user.id
+			},
 			done : false
 		}, function(err, place) {
 			if (err) {
@@ -135,6 +140,19 @@ module.exports = function(app) {
 				res.json(places); 
 			})
 		})
+		// Place.create({
+		// 	text : req.body.text, 
+		// 	done : false
+		// }, function(err, place) {
+		// 	if (err) {
+		// 		res.send(err);
+		// 	}
+		// 	Place.find(function(err, places) {
+		// 		if (err) 
+		// 			res.send(err)
+		// 		res.json(places); 
+		// 	})
+		// })
 	});
 
 	app.delete('/api/places/:place_id', function(req,res){
