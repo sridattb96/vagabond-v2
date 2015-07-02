@@ -5,18 +5,22 @@ var profileedit = angular.module('profileedit', [])
 		method: 'GET',
 		url: 'api/loginInfo',
 		data: {},
-	}).success(function(data){
-		$scope.user = {
-			firstName: data._json.first_name,
-			lastName: data._json.last_name,
-			fbid: data.id
-		}
-	
+	}).success(function(fbdata){
+		$scope.fbid = fbdata.id;
+		$http({
+			method: 'GET',
+			url: '/api/getSavedInfo/' + fbdata.id,
+		    data: {},
+		}).success(function(userdata){
+			$scope.user = userdata;
+			$scope.user.firstName = fbdata._json.first_name,
+			$scope.user.lastName = fbdata._json.last_name
+		});
 	});
 
-	$scope.onSave = function(user){
+	$scope.onSave = function(){
 		var userSaveData = $scope.user;
-		var fbid = $scope.user.fbid;
+		var fbid = $scope.fbid;
 		$http({
 			method: 'PUT',
 			url: '/api/saveInfo/' + fbid,

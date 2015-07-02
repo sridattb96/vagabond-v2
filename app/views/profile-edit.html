@@ -122,16 +122,7 @@
 	    <label>Interests</label>
 	    <textarea ng-model="user.interests"></textarea>
 	  </div>
-	  <div ng-click="onSave(user)" class="ui submit button">Save</div> {{user | json}} {{master | json}}
-	  
-	  <input type="checkbox" class="fire-check" />
-	  <button class="fire">Notify</button>
-	  <section>
-	  	<div class="tn-box tn-box-color-1">
-			<p>Your settings have been saved successfully!</p>
-			<div class="tn-progress"></div>
-		</div>
-	  </section>
+	  <div ng-click="onSave()" class="ui submit button">Save</div> {{user | json}} {{master | json}}
 	</form>
 	</div>
 	</div>
