@@ -156,6 +156,7 @@ module.exports = function(app) {
 					console.log('you dont exist');
 				}
 				else {
+					user.email = req.body.email;
 					user.age = req.body.age;
 					user.gender = req.body.gender;
 					user.city = req.body.city;

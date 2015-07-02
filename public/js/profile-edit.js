@@ -1,4 +1,4 @@
-var profile-edit = angular.module('profile-edit', [])
+var profileedit = angular.module('profileedit', [])
 .controller('ProfileEditController', ['$scope', '$http', function($scope, $http){
 
 	$http({
@@ -9,10 +9,9 @@ var profile-edit = angular.module('profile-edit', [])
 		$scope.user = {
 			firstName: data._json.first_name,
 			lastName: data._json.last_name,
-			fbid = data.id
+			fbid: data.id
 		}
 	
-		
 	});
 
 	$scope.onSave = function(user){

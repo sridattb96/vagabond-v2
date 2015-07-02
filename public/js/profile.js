@@ -11,7 +11,6 @@ var profile = angular.module('profile', [])
 			firstName: data._json.first_name,
 			lastName: data._json.last_name,
 			id: data.id
-
 		}
 	});
 
