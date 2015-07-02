@@ -1,5 +1,6 @@
 var profileEdit = angular.module('profile-edit', [])
 .controller('ProfileEditController', ['$scope', '$http', function($scope, $http){
+	$('#saveMsg').hide();
 
 	$http({
 		method: 'GET',
@@ -19,6 +20,7 @@ var profileEdit = angular.module('profile-edit', [])
 	});
 
 	$scope.onSave = function(){
+		$('#saveMsg').show();
 		var userSaveData = $scope.user;
 		var fbid = $scope.fbid;
 		$http({
@@ -27,6 +29,8 @@ var profileEdit = angular.module('profile-edit', [])
 			data: userSaveData
 		}).success(function(data){
 			console.log(data);
-		})
+		}).error(function(data) {
+            console.log('Error: ' + data);
+        });
 	};
 }]);

@@ -1,14 +1,19 @@
 <<!DOCTYPE html>
 <html ng-app="profile-edit">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 
     <script type="text/javascript" src="js/profile-edit.js"></script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
 <head>
 	<title>Vagabond | Edit Profile</title>
 </head>
 <body ng-controller="ProfileEditController">
+	<a href="/profile"> Back to Profile </a>
 	<div class="ui two column centered grid">
 	<div class="column">
 	<form class="ui form" id="userform">
@@ -51,7 +56,7 @@
 	          <input type="text" ng-model="user.city" name="city" placeholder="City">
 	    </div>
 	    <div class="field">
-	      <select ng="user.state" class="ui search dropdown">
+	      <select ng-model="user.state" class="ui search dropdown">
 	        <option value="">State</option>
 	        <option value="AL">Alabama</option>
 	        <option value="AL">Alabama</option>
@@ -117,9 +122,15 @@
 	    <label>Interests</label>
 	    <textarea ng-model="user.interests"></textarea>
 	  </div>
-	  <div ng-click="onSave()" class="ui submit button">Save</div> {{user | json}} {{master | json}}
+	  <div ng-click="onSave()" class="ui submit button">Save</div>
+	  <div id="saveMsg" class="ui floating message">
+		  <p>Saved successfully.</p>
+	  </div>
 	</form>
 	</div>
 	</div>
 </body>
+	<script>
+		
+	</script>
 </html>
