@@ -189,4 +189,18 @@ module.exports = function(app) {
 			console.log(user);
 		});
 	});
+
+	app.get('/api/getSavedInfo/:id', function(req, res){
+		User.findOne({facebookId: req.params.id}, function(err, user){
+			if (err)
+				console.log(err);
+			else {
+				if (!user){
+					console.log('you dont exist')
+				} else {
+					res.send(user);
+				}
+			}
+		})
+	})
 };
