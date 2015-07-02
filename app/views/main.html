@@ -85,10 +85,12 @@
 		    <a href="#" class="item">Home</a>
 		    <div class="right menu">
 		      <div class="item">
-		        <div class="ui action left icon input">
-		          <i class="search icon"></i>
-		          <input type="text" placeholder="Search" ng-model="query">
-		          <button class="ui button" disabled="">Add</button>
+		        <div class="ui search">
+		          <div class="ui icon input">
+		            <input class="prompt" type="text" placeholder="Search places..." ng-model="query">
+		            <i class="search icon"></i>
+		          </div>
+		          <div class="results"></div>
 		        </div>
 		      </div>
 		      <div class="ui dropdown item">
@@ -97,8 +99,9 @@
 		        {{ loginInfo.displayName }}
 		        <i class="dropdown icon"></i>
 		        <div class="menu">
-		          <a href=""><div class="item"><i class="users icon"></i> Requests</div></a>
+		          <a href=""><div class="item"><i class="send icon"></i> Requests</div></a>
 		          <a href="/profile"><div class="item"><i class="users icon"></i> Profile</div></a>
+		           <a href="/logout"><div class="item"><i class="power icon"></i> Logout</div></a>
 		          <!-- <div class="divider"></div> -->
 		        </div>
 		      </div>
@@ -147,7 +150,7 @@
 		  </div>
 		  
 		</form>
-		<h1>Number of Places: <span class="">{{ (places | filter: query).length }}</span></h1>
+		<h3><span class=""><b>{{ (places | filter: query).length }}</b></span> Results</h3>
 
 		<br>
 		
