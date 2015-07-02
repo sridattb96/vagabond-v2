@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="feed">
+<html ng-app="main">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,9 +13,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
-    <script src="js/feed.js"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -26,7 +24,6 @@
 				<div class="ui segment">
 					<div ng-include="" src="'partials/navbar.html'"></div>
 					<h1>Number of Places: <span class="">{{ places.length }}</span></h1>
-					<img src="<%= picture %>"/>
 
 					<br>
 

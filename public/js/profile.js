@@ -8,14 +8,16 @@ var profile = angular.module('profile', [])
 	}).success(function(data){
 		$scope.user = {
 			firstName: data._json.first_name,
-			lastName: data._json.last_name
+			lastName: data._json.last_name,
+			fbid = data.id
 		}
-		$scope.fbid = data.id;
+	
+		
 	});
 
 	$scope.onSave = function(user){
 		var userSaveData = $scope.user;
-		var fbid = $scope.fbid;
+		var fbid = $scope.user.fbid;
 		$http({
 			method: 'PUT',
 			url: '/api/saveInfo/' + fbid,

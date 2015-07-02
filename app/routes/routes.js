@@ -63,11 +63,6 @@ module.exports = function(app) {
 	    		}
 	    	}
 	    })
-	    // User.create({ 
-	    // 	facebookId : req.user.id
-	    // }, function(err, user) {
-	    // 	// 
-	    // });
 		res.redirect('/main');
 	  });
 	  
@@ -79,7 +74,7 @@ module.exports = function(app) {
 
 	app.get('/main', function(req, res) {
 		res.render('main.ejs', {
-			picture: 'https://graph.facebook.com/' + req.user.id + '/picture?height=350&width=250'
+			// picture: 'https://graph.facebook.com/' + req.user.id + '/picture?height=250&width=250'
 		});
 		
 		// res.send('./public/main.html');
@@ -147,6 +142,12 @@ module.exports = function(app) {
 
 	app.get('/profile', function(req, res){
 		res.render('profile.html');
+	});
+
+	app.get('/profile-real', function(req, res){
+		res.render('profile-real.ejs', { 
+			// picture: 'https://graph.facebook.com/' + req.user.id + '/picture?height=100&width=100'
+		});
 	});
 
 	// app.put('/api/saveInfo/:id', function(req, res){

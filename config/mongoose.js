@@ -4,8 +4,8 @@ var config = require('./config'),
 module.exports = function() {
   	var db = mongoose.createConnection(config.db);
 
-  	require('../app/models/place')
-  	require('../app/models/user')
+  	require('../app/models/place');
+  	require('../app/models/user');
 
   	return db;
 };
