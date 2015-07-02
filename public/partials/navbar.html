@@ -1,18 +1,72 @@
-<!-- <div class="">
-    <ul class="" ng-hide="currentUser">
-        <li><a href="/login">Log In</a></li>
-        <li><a href="/signup">Sign up</a></li>
-    </ul>
-    <ul class="" ng-show="currentUser">
-        <li class="">
-            <a class="">Welcome, {{ currentUser.username }} <b class="caret"></b></a>
-            <ul class="">
-                <li><a ng-click="logout()"><span class=""></span> Logout</a></li>
-            </ul>
-        </li>
-    </ul>
+<!-- <img src="https://graph.facebook.com/{{ loginInfo.id }}/picture?height=250&width=250"/> -->
+
+<div class="ui secondary menu">
+  <div class="header item"><a style="color: black;" href="/">Vagabond</a></div>
+  <div class="active item"><a style="color: black;" href="/">Home</a></div>
+  
+  <div class="right menu">
+    <div class="item">
+      <div class="ui action left icon input">
+        <i class="search icon"></i>
+        <input type="text" placeholder="Search">
+        <button class="ui button">Submit</button>
+      </div>
+    </div>
+    <div class="ui dropdown item">
+      <img src="https://graph.facebook.com/{{ loginInfo.id }}/picture?height=25&width=25"/> 
+      &nbsp;
+      {{ loginInfo.displayName }}
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a href="/profile"><div class="item"><i class="users icon"></i> Profile</div></a>
+        <!-- <div class="divider"></div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Following Menu -->
+<!-- <div class="ui large top fixed hidden menu">
+  <div class="ui container">
+    <a class="active item">Home</a>
+    <a class="item">About</a>
+  </div>
 </div> -->
 
-<h1>Vagabond</h1>
-<h2>Welcome, {{ loginInfo.displayName }}</h2>  
-<img src="https://graph.facebook.com/{{ loginInfo.id }}/picture?height=250&width=250"/> 
+<!-- Sidebar Menu -->
+<!-- <div class="ui vertical inverted sidebar menu">
+  <a class="active item">Home</a>
+  <a class="item">About</a>
+ 
+</div> -->
+
+
+
+<!-- <div class="ui menu">
+  <div class="header item">Vagabond</div>
+  <a class="active item">Link</a>
+  <a class="item">Link</a>
+  <div class="ui dropdown item">
+    Dropdown
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="item">Action</div>
+      <div class="item">Another Action</div>
+      <div class="item">Something else here</div>
+      <div class="divider"></div>
+      <div class="item">Separated Link</div>
+      <div class="divider"></div>
+      <div class="item">One more separated link</div>
+    </div>
+  </div>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui action left icon input">
+        <i class="search icon"></i>
+        <input type="text" placeholder="Search">
+        <button class="ui button">Submit</button>
+      </div>
+    </div>
+    
+  </div>
+</div> 

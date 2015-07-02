@@ -1,21 +1,21 @@
 <!doctype html>
-<html ng-app="feed">
+<html ng-app="main">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Vagabond</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.css"> -->
+    <link rel="stylesheet" href="lib/semantic-ui/dist/components/reset.css">
     <link rel="stylesheet" href="lib/semantic-ui/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/menu.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
-    <script src="js/feed.js"></script>
+    <script type="text/javascript" src="lib/semantic-ui/dist/components/dropdown.js"></script>
     <script src="js/main.js"></script>
 
 </head>
@@ -24,7 +24,12 @@
 		<div class="center aligned one column row">
 			<div class="column">
 				<div class="ui segment">
-					<div ng-include="" src="'partials/navbar.html'"></div>
+					
+					
+					<div ng-include src="'partials/navbar.html'"></div>
+
+					
+
 					<h1>Number of Places: <span class="">{{ places.length }}</span></h1>
 
 					<br>

@@ -7,15 +7,34 @@ var passport = require('passport'),
 
 // Define the routes module' method
 module.exports = function(app) {
+	app.get('*', function(req, res, next) {
+		next();
+		// if (! req.user) {
+		// 	console.log('NO USER BREH');
+		// 	next();
+		// }
+		// console.log('FOUND USER BREH');
+		// next();
+	})
+
+	app.get('/test', function(req, res) {
+		res.render('test.html');
+	})
 
 
 	app.get('/', function(req, res) {
+		if (req.user) {
+			res.render('main.html');
+		}
+		else {
+			res.render('login.html')
+		}
 		// if (req.session.lastVisit) {
 	 //    	console.log(req.session.lastVisit);
 	 //    }
 	 //    req.session.lastVisit = new Date(); 
 
-	    res.render('login.html')
+	    
 	});
 
 	app.get('/auth/facebook',
@@ -69,7 +88,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/main', function(req, res) {
-		res.render('main.ejs', {
+		res.render('main.html', {
 			// picture: 'https://graph.facebook.com/' + req.user.id + '/picture?height=250&width=250'
 		});
 		
