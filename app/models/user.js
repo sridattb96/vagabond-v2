@@ -10,7 +10,8 @@ var UserSchema = new Schema({
 	city: String,
 	state : String,
 	biography: String,
-	interests: String
+	interests: String,
+	placesOfInterest: Array
 });
 
 var User = mongoose.model('User', UserSchema);

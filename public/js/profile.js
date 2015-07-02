@@ -1,6 +1,6 @@
 var profile = angular.module('profile', [])
 .controller('ProfileController', ['$scope', '$http', function($scope, $http){
-	
+
 	$http({
 		method: 'GET',
 		url: 'api/loginInfo',
@@ -14,6 +14,7 @@ var profile = angular.module('profile', [])
 	});
 
 	$scope.onSave = function(user){
+		var userSaveData = $scope.user;
 		var fbid = $scope.fbid;
 		$http({
 			method: 'PUT',
