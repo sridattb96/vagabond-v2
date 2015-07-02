@@ -1,15 +1,11 @@
 <<!DOCTYPE html>
 <html ng-app="profileedit">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 
     <script type="text/javascript" src="js/profile-edit.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../CSS3TimedNotifications/css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="../../CSS3TimedNotifications/css/style.css" />
-   	<link href='http://fonts.googleapis.com/css?family=Alegreya+SC:700,400italic' rel='stylesheet' type='text/css' />
-
-    <script type="text/javascript" src="../../CSS3TimedNotifications/js/modernizr.custom.39460.js"></script> 
-
 <head>
 	<title>Vagabond | Edit Profile</title>
 </head>
@@ -56,7 +52,7 @@
 	          <input type="text" ng-model="user.city" name="city" placeholder="City">
 	    </div>
 	    <div class="field">
-	      <select ng="user.state" class="ui search dropdown">
+	      <select ng-model="user.state" class="ui search dropdown">
 	        <option value="">State</option>
 	        <option value="AL">Alabama</option>
 	        <option value="AL">Alabama</option>
@@ -123,6 +119,9 @@
 	    <textarea ng-model="user.interests"></textarea>
 	  </div>
 	  <div ng-click="onSave()" class="ui submit button">Save</div> {{user | json}} {{master | json}}
+	  <div id="saveMsg" class="ui floating message">
+		  <p>Saved successfully.</p>
+	  </div>
 	</form>
 	</div>
 	</div>
