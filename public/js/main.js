@@ -14,6 +14,19 @@ function mainController($scope, $http) {
 
 //---------------------
 
+    $scope.seePlace = function(place) {
+        console.log(place.requester.facebookId);
+        var url = 'https://graph.facebook.com/' + place.requester.facebookId + '?fields=context.fields%28mutual_likes%29&access_token=' + $scope.loginInfo.accessToken; 
+        $http.get(url)
+            .success(function(data) {
+                console.log('Mutual likes = ' + data.context.mutual_likes).summary.total_count);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    }
+
+
     $http.get('/api/places')
         .success(function(data) {
             $scope.places = data;
@@ -36,26 +49,6 @@ function mainController($scope, $http) {
             console.log(data);
         })
     };
-
-    $scope.seePlace = function(place) {
-        console.log('card clicked!');
-        console.log(place.requester.facebookId);
-    }
-
-
-
-
-    // $scope.createPlace = function() {
-    //     $http.post('/api/places', $scope.formData)
-    //         .success(function(data) {
-    //             $scope.formData = {}; 
-    //             $scope.places = data;
-    //             console.log(data);
-    //         })
-    //         .error(function(data) {
-    //             console.log('Error: ' + data);
-    //         });
-    // };
 
     $scope.deletePlace = function(id) {
         $http.delete('/api/places/' + id)

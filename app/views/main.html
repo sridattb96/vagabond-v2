@@ -164,9 +164,9 @@
 		      <img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=500&width=600">
 		    </div>
 		    <div class="content">
-		      <div class="header">{{ place.requester.name }}</div>
+		      <div class="header">{{ place.name }}</div>
 		      <div class="meta">
-		        <a>[occupation]</a>
+		        <a>{{ place.requester.name }}</a>
 		      </div>
 		      <div class="description">
 		        {{ place.reason }}

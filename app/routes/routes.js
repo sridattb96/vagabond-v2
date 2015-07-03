@@ -171,9 +171,15 @@ module.exports = function(app) {
 			},
 			done : false
 		}, function(err, place) {
+			
 			if (err) {
 				res.send(err);
 			}
+			User.findOne({ 'fb.id' : req.user.id }, function(err, user) {
+				console.log(place._id); 
+				user.placesOfInterest.push(place._id);
+				user.save();
+			})
 			Place.find(function(err, places) {
 				if (err) 
 					res.send(err)
@@ -237,19 +243,19 @@ module.exports = function(app) {
 		});
 	});
 
-	// app.get('/api/getSavedInfo/:id', function(req, res){
-	// 	User.findOne({ 'fb.id' : req.params.id}, function(err, user){
-	// 		if (err)
-	// 			console.log(err);
-	// 		else {
-	// 			if (!user){
-	// 				console.log('you dont exist')
-	// 			} else {
-	// 				res.send(user);
-	// 			}
-	// 		}
-	// 	})
-	// })
+	app.get('/api/user/:id', function(req, res){
+		User.findOne({ 'fb.id' : req.params.id}, function(err, user){
+			if (err)
+				console.log(err);
+			else {
+				if (!user){
+					console.log('you dont exist')
+				} else {
+					res.send(user);
+				}
+			}
+		})
+	})
 
 	//find users that match desired locations
 	/*
