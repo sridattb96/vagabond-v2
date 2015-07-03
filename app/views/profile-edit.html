@@ -23,16 +23,16 @@
 	      <label>Name</label>
 	      <div class="two fields">
 	        <div class="field">
-	          <input id="firstname" type="text" disabled ng-model="user.firstName" name="first-name" placeholder="First Name"> {{ user.firstname }}
+	          <input id="firstname" type="text" disabled ng-model="user.firstName" name="first-name" placeholder="First Name"> 
 	        </div>
 	        <div class="field">
-	          <input id="lastname" type="text" disabled ng-model="user.lastName" name="last-name" placeholder="Last Name">
+	          <input id="lastname" type="text" disabled ng-model="user.lastName" name="last-name" placeholder="Last Name"> 
 	        </div>
 	      </div>
 	    </div>
 	    <div class="field">
 	      <label>Gender</label>
-		      <select ng-model="user.gender" class="ui search dropdown">
+		      <select ng-model="user.fb.gender" class="ui search dropdown">
 		      	<option value="">Gender</option>
 		      	<option value="male">Male</option>
 		      	<option value="female">Female</option>
@@ -40,10 +40,10 @@
 		      </select>
 	    </div>
 	    <div class="three fields">
-	    	<!-- <div class="field">
+	    	<div class="field">
 	    		<label>Occupation</label>
 	    		<input id="occupation" type="text" ng-model="user.occupation" name="occupation" placeholder="Occupation">
-	    	</div> -->
+	    	</div>
 		    <div class="field">
 		    	<label>Email</label>
 		    	<input id="email" type="email" ng-model="user.email" name="email" placeholder="Email">

@@ -4,14 +4,14 @@ function mainController($scope, $http) {
     $scope.placeData = {};
 
 //this sets up a google places listener, so once you fix the input box thing this works I tested in diff file
-/*
-    function initialize() {
-        var input = $scope.formData.text;
-        var autocomplete = new google.maps.places.Autocomplete(input);
-    }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
-*/
+    // function initialize() {
+    //     var input = $scope.formData.text;
+    //     var autocomplete = new google.maps.places.Autocomplete(input);
+    // }
+
+    // google.maps.event.addDomListener(window, 'load', initialize);
+
 //---------------------
 
     $http.get('/api/places')
@@ -36,6 +36,13 @@ function mainController($scope, $http) {
             console.log(data);
         })
     };
+
+    $scope.seePlace = function(place) {
+        console.log('card clicked!');
+        console.log(place.requester.facebookId);
+    }
+
+
 
 
     // $scope.createPlace = function() {

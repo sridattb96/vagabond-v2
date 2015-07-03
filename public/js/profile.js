@@ -5,12 +5,13 @@ var profile = angular.module('profile', [])
 		method: 'GET',
 		url: 'api/loginInfo',
 		data: {},
-	}).success(function(data){
-		console.log("FIRSTNAME = " + data._json.first_name);
+	}).success(function(user){
+		// console.log("FIRSTNAME = " + user.fb._json.first_name);
 		$scope.user = {
-			firstName: data._json.first_name,
-			lastName: data._json.last_name,
-			id: data.id
+			occupation: user.occupation,
+			firstName: user.fb._json.first_name,
+			lastName: user.fb._json.last_name,
+			id: user.fb.id
 		}
 	});
 

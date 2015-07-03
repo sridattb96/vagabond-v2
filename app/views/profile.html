@@ -22,7 +22,7 @@
       <div class="center item">
           <img class="ui center circular image" style="display: inline;" src="https://graph.facebook.com/{{ user.id }}/picture?height=125&width=125">
           <div class="content">
-            <div class="ui sub header">Traveler</div>
+            <div class="ui sub header">{{ user.occupation }}</div>
             {{ user.firstName }} {{ user.lastName }}
           </div>
           <a href="/profile-edit">Edit Profile</a>

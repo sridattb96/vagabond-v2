@@ -2,18 +2,21 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema; 
 
 var UserSchema = new Schema({
-	facebookId : Number, 
-	firstName : String,
-	lastName : String,
-	// occupation: String, 
-	email : String,
-	age : Number,
-	gender : String,
+	fb : Object, 
+	accessToken : String, 
+
+	occupation: {
+		type: String, 
+		default: "Traveler"
+	},
+	age: Number,
 	city: String,
-	state : String,
+	state: String,
 	biography: String,
 	interests: String,
 	placesOfInterest: Array
+}, { 
+	minimize: false
 });
 
 var User = mongoose.model('User', UserSchema);
