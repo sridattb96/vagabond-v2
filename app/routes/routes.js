@@ -62,6 +62,7 @@ module.exports = function(app) {
 	    				facebookId : req.user.id,
 	    				firstName : req.user._json["first_name"],
 	    				lastName : req.user._json["last_name"],
+	    				occuption: "Traveler",
 	    				age: 10,
 	    				gender : req.user.gender,
 	    				city: "",
@@ -184,6 +185,7 @@ module.exports = function(app) {
 				else {
 					user.email = req.body.email;
 					user.age = req.body.age;
+					user.occupation = req.body.occupation;
 					user.gender = req.body.gender;
 					user.city = req.body.city;
 					user.state = req.body.state;
