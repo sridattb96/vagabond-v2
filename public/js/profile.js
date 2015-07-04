@@ -7,12 +7,11 @@ var profile = angular.module('profile', [])
 		data: {},
 	}).success(function(user){
 		// console.log("FIRSTNAME = " + user.fb._json.first_name);
-		$scope.user = {
-			occupation: user.occupation,
-			firstName: user.fb._json.first_name,
-			lastName: user.fb._json.last_name,
-			id: user.fb.id
-		}
+		$scope.user = user;
+		$scope.user.firstName = user.fb._json.first_name;
+		$scope.user.lastName = user.fb._json.last_name;
+		$scope.user.occupation = user.fb._json.occupation;
+		$scope.user.id = user.fb.id
 	});
 
 

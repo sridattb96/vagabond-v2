@@ -8,6 +8,7 @@ var profileEdit = angular.module('profile-edit', [])
 		url: 'api/loginInfo',
 		data: {},
 	}).success(function(user){
+		console.log(user)
 		// $scope.fbid = user.fb.id;
 		$scope.user = user;
 		$scope.user.firstName = user.fb._json.first_name;

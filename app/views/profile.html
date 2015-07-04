@@ -17,6 +17,16 @@
     <script src="js/profile.js"></script>
 
 </head>
+<style>
+  #menu {
+    z-index: -1;
+  }
+
+  img {
+    z-index: 1;
+  }
+
+</style>
 <body ng-controller="ProfileController">
     <h2 class="ui center aligned icon header">
       <div class="center item">
@@ -25,8 +35,39 @@
             <div class="ui sub header">{{ user.occupation }}</div>
             {{ user.firstName }} {{ user.lastName }}
           </div>
-          <a href="/profile-edit">Edit Profile</a>
-
         </div>
     </h2>
+    
+    <div id="menu" class="ui pointing four item menu">
+      <a class="item active" data-tab="about">About</a>
+      <a class="item" data-tab="bonds">Bonds</a>
+      <a class="item" data-tab="gallery">Gallery</a>
+      <a class="item" data-tab="calendar">Calendar</a>
+    </div>
+
+    <div class="ui tab" data-tab="home"> 
+    Home
+    </div>
+    <div class="ui tab" data-tab="about">
+      <div class="ui item">
+      <a href="/profile-edit">Edit Profile</a> <br>
+        {{ user.firstName }} {{user.lastName }} <br>
+        {{ user.city }}, {{ user.state }} <br>
+        Bio: {{ user.biography }} <br>
+        Interests: {{ user.interests }} 
+      </div>
+    </div>
+    <div class="ui tab" data-tab="bonds">
+    Bonds
+    </div>
+    <div class="ui tab" data-tab="gallery"> Gallery</div>
+    <div class="ui tab" data-tab="calendar"> Calendar</div>
+
+
 </body>
+  <script type="text/javascript">
+  $(document).ready(function(){
+      $('.menu .item').tab();
+  })
+    </script>
+</html>
