@@ -62,9 +62,6 @@
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .ui.link.cards:hover {
-/*    	-webkit-filter: blur(15px);	
-*/    }
     </style>
 
 </head>
@@ -169,31 +166,48 @@
 		    <div class="image">
 		      <img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=500&width=600">
 		    </div>
-		    <div class="content">
-		      <div class="header">{{ place.name }}</div>
-		      <div class="meta">
-		        <a>{{ place.requester.name }}</a>
-		      </div>
-		      <div class="description">
-		        {{ place.reason }}
-		      </div>
-		    </div>
-		    <div class="extra content">
-		      <span class="right floated">
-		        Time Since
-		      </span>
-		      <span class="left floated">
-		        <i class="user icon"></i>
-		        Mutual Friends
-		      </span>
-		    </div>
-		  </div>
-		  
-		  
+			    <div class="content">
+			      <div class="header">{{ place.name }}</div>
+			      <div class="meta">
+			        <a>{{ place.requester.name }}</a>
+			      </div>
+			      <div class="description">
+			        {{ place.reason }}
+			      </div>
+			    </div>
+			    <div class="extra content">
+			      <span class="right floated">
+			        Time Since
+			      </span>
+			      <span class="left floated">
+			        <i class="user icon"></i>
+			        Mutual Friends
+			      </span>
+			    </div>
+
+			    <div class="ui modal" aria-hidden="true">
+			    	<div class="item">
+			    	<div class="header">
+			    		{{ modalData.fb._json.name }}
+			    		<div class="image content">
+			    			<div class="ui medium image">
+			    		 		<img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=500&width=600">
+			    		 	</div>
+			    		 	<div class="description">
+				    		 	Occupation: {{ modalData.occupation }} <br>
+				    		 	Biography: {{ modalData.biography }} <br> 
+				    		 	Interests: {{ modalData.interests }} <br>
+				    		 </div>
+			    		</div>
+			    		<div class="actions">
+			    			<div class="ui black deny button"> Done </div>
+			    			<div class="ui positive button"> Bond </div>
+			    		</div>
+			    	</div>
+			    	</div>
+			    </div>
+		  </div>		  
 		</div>
-		
-
-
 		<br>
 
 				
@@ -203,7 +217,6 @@
 
 
 	</div>
-
-
 </body>
+
 </html>

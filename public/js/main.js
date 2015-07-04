@@ -12,12 +12,20 @@ function mainController($scope, $http) {
     $scope.placeData = {};
 
     $scope.seePlace = function(place) {
-        //get user's info
+
+        $('.ui.modal')
+          .modal({
+            blurring: true
+          })
+          .modal('show')
+        ;
+
+        //get user's info and display
         $http.get('/api/user/' + place.requester.facebookId)
             .success(function(data){
                 console.log(data)
+                $scope.modalData = data;
             });
-
 
         //get mutual likes
         console.log(place.requester.facebookId);
