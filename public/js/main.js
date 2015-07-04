@@ -2,6 +2,8 @@ var main = angular.module('main', []);
 
 function mainController($scope, $http) {
 
+    $scope.orderProp = '-time';
+
     function initialize() {
         var input = (document.getElementById('placeName'));
         var autocomplete = new google.maps.places.Autocomplete(input);
@@ -23,7 +25,6 @@ function mainController($scope, $http) {
         //get user's info and display
         $http.get('/api/user/' + place.requester.facebookId)
             .success(function(data){
-                console.log(data)
                 $scope.modalData = data;
             });
 

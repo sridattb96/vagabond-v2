@@ -28,6 +28,7 @@
     #banner-container {
     	background: url('https://download.unsplash.com/photo-1428263197823-ce6a8620d1e1');
     	background-size: cover;
+    	background-attachment: fixed;
     	padding-top: 5.5em;
     }
     .ui.text.container {
@@ -147,10 +148,10 @@
 			    </div>
 			    <div ng-click="addPlace()" class="ui submit button">Add</div> 
 			    <div class="inline field">
-			      <select ng-model="user.gender" class="ui search dropdown">
-				      	<option value="">Sort</option>
-				      	<option value="">Mutual Friends</option>
-				      	<option value="">Time of Request</option>
+			      	<select ng-model="orderProp" class="ui search dropdown" >
+				      	<option value="-time">Most Recent</option>
+				      	<option value="time">Least Recent</option>
+				      	<option value="name">Name of Place</option>
 				      	<option value="">Mutual Interests</option>
 			    	</select>
 			    	<label><b>{{ (places | filter: query).length }}</b> Results</label>
@@ -162,7 +163,7 @@
 		<br>
 		
 		<div class="ui link cards" >
-		  <div class="card" ng-repeat="place in places | filter: query | orderBy: '-time' " ng-click="seePlace(place)">
+		  <div class="card" ng-repeat="place in places | filter: query | orderBy: orderProp " ng-click="seePlace(place)">
 		    <div class="image">
 		      <img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=500&width=600">
 		    </div>
@@ -191,7 +192,7 @@
 			    		{{ modalData.fb._json.name }}
 			    		<div class="image content">
 			    			<div class="ui medium image">
-			    		 		<img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=500&width=600">
+			    		 		<img src="https://graph.facebook.com/{{ modalData.fb.id }}/picture?height=500&width=600">
 			    		 	</div>
 			    		 	<div class="description">
 				    		 	Occupation: {{ modalData.occupation }} <br>
