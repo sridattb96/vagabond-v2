@@ -19,7 +19,7 @@ function mainController($scope, $http) {
         var url = 'https://graph.facebook.com/' + place.requester.facebookId + '?fields=context.fields%28mutual_likes%29&access_token=' + $scope.loginInfo.accessToken; 
         $http.get(url)
             .success(function(data) {
-                console.log('Mutual likes = ' + data.context.mutual_likes).summary.total_count);
+                console.log('Mutual likes = ' + data.context.mutual_likes.summary.total_count);
             })
             .error(function(data) {
                 console.log('Error: ' + data);
