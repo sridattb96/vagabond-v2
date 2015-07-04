@@ -136,7 +136,7 @@
 				
 		<!-- <div ng-include src="'partials/navbar.html'"></div> -->
 		
-		<form class="ui form">
+		<form name="placeForm" class="ui form">
 			<div class="three fields">
 			    <div class="field">
 			      <input type="text" id="placeName" ng-model="place.name" placeholder="Place"> 
@@ -205,7 +205,7 @@
 <script>
 
 	 function initialize() {
-        var input = ( document.getElementById('placeName'));
+        var input = (document.getElementById('placeName'));
         var autocomplete = new google.maps.places.Autocomplete(input);
       }
 
