@@ -99,7 +99,7 @@
 		      <div class="ui dropdown item">
 		        <img src="https://graph.facebook.com/{{ loginInfo.fb.id }}/picture?height=100&width=100"/> 
 		        &nbsp;
-		        {{ loginInfo.displayName }}
+		        <!-- {{ loginInfo.fb.displayName }} -->
 		        <i class="dropdown icon"></i>
 		        <div class="menu">
 		          <a href=""><div class="item"><i class="send icon"></i> Requests</div></a>
@@ -162,7 +162,7 @@
 		<br>
 		
 		<div class="ui link cards" >
-		  <div class="card" ng-repeat="place in places | filter: query" ng-click="seePlace(place)">
+		  <div class="card" ng-repeat="place in places | filter: query | orderBy: '-time' " ng-click="seePlace(place)">
 		    <div class="image">
 		      <img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=500&width=600">
 		    </div>

@@ -162,6 +162,7 @@ module.exports = function(app) {
 	});
 
 	app.post('/api/places', function(req, res) {
+		var d = new Date(); 
 		Place.create({
 			name : req.body.name, 
 			reason : req.body.reason,
@@ -169,7 +170,7 @@ module.exports = function(app) {
 				name : req.user.displayName,
 				facebookId : req.user.id
 			},
-			done : false
+			time : d
 		}, function(err, place) {
 			
 			if (err) {
