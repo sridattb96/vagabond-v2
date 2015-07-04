@@ -1,9 +1,25 @@
 var main = angular.module('main', []);
 
 function mainController($scope, $http) {
+
+    function initialize() {
+        var input = (document.getElementById('placeName'));
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
     $scope.placeData = {};
 
     $scope.seePlace = function(place) {
+        //get user's info
+        $http.get('/api/user/' + place.requester.facebookId)
+            .success(function(data){
+                console.log(data)
+            });
+
+
+        //get mutual likes
         console.log(place.requester.facebookId);
         var url = 'https://graph.facebook.com/' + place.requester.facebookId + '?fields=context.fields%28mutual_likes%29&access_token=' + $scope.loginInfo.accessToken; 
         $http.get(url)
@@ -26,6 +42,7 @@ function mainController($scope, $http) {
         });
 
     $scope.addPlace = function(){
+        $scope.place.name = document.getElementById('placeName').value;
         var placeData = $scope.place;
         $http({
             method: 'POST',
