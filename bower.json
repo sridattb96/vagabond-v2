@@ -2,6 +2,7 @@
   "name": "Vagabond",
   "version": "0.0.7",
   "dependencies": {
-  	"semantic-ui": "*"
+    "semantic-ui": "*",
+    "moment": "~2.10.3"
   }
 }

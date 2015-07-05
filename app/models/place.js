@@ -8,7 +8,8 @@ var PlaceSchema = new Schema({
 		name : String,
 		facebookId : Number
 	},
-	time: Date
+	time: Date,
+	interestedPeople: Array
 })
 
 var Place = mongoose.model('Place', PlaceSchema);

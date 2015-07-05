@@ -13,6 +13,10 @@ function mainController($scope, $http) {
 
     $scope.placeData = {};
 
+    $scope.moment = function(time) {
+        return moment(time).fromNow(); 
+    }
+
     $scope.seePlace = function(place) {
 
         $('.ui.modal')
@@ -29,6 +33,8 @@ function mainController($scope, $http) {
             });
 
         //get mutual likes
+        // var m = moment(place.time).fromNow();
+        // console.log(m);
         console.log(place.requester.facebookId);
         var url = 'https://graph.facebook.com/' + place.requester.facebookId + '?fields=context.fields%28mutual_likes%29&access_token=' + $scope.loginInfo.accessToken; 
         $http.get(url)
