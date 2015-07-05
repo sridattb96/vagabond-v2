@@ -10,13 +10,13 @@ var profile = angular.module('profile', [])
 		$scope.user = user;
 		$scope.user.firstName = user.fb._json.first_name;
 		$scope.user.lastName = user.fb._json.last_name;
-		$scope.user.occupation = user.fb._json.occupation;
+		$scope.user.occupation = user.occupation;
 		$scope.user.id = user.fb.id
 	});
 
 	
-	$scope.getInterested = function() {
-		console.log('show interested people');
-	}
+	// $scope.getInterested = function() {
+	// 	console.log('show interested people');
+	// }
 	
 }]);

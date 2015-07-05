@@ -27,6 +27,7 @@ function mainController($scope, $http) {
             console.log('new place object: ')
             console.log(data);
         });
+    }
 
     $scope.moment = function(time) {
         return moment(time).fromNow(); 

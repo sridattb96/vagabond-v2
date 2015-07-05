@@ -13,14 +13,6 @@ var Place = mongoose.model('Place'),
 // Define the routes module' method
 module.exports = function(app) {
 
-	// -- SOCKET IO, REFACTOR LATER
-	var server = require('http').createServer(app).listen(3000);
-	var io = require('socket.io').listen(server);
-
-	io.on('connection', function(socket){
-	  console.log('a user connected');
-	});
-
 	passport.serializeUser(function(user, done) {
 	  done(null, user);
 	});
@@ -256,37 +248,6 @@ module.exports = function(app) {
 					console.log('you dont exist')
 				} else {
 					res.send(user);
-				}
-			}
-		})
-	})
-
-	app.post('/api/sendRequest/:placeId', function(req, res){
-		console.log('gets in sendRequest api');
-		Place.findOne({'_id' : req.params.placeId}, function(err, place){
-			if (err)
-				console.log(err)
-			else {
-				if (!place)
-					console.log('this card doesnt exist')
-				else {
-					place.interestedPeople.push(req.user.id);
-					place.save();
-					res.send(place);
-				}
-			}
-		})
-	})
-
-	app.get('/api/seeCurrentInterested/:id', function(req, res){
-		User.findOne({ 'fb.id' : req.params.id}, function(err, user){
-			if (err)
-				console.log(err);
-			else {
-				if (!user){
-					console.log('you dont exist')
-				} else {
-					req.query.id = ''
 				}
 			}
 		})
