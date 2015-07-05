@@ -147,6 +147,22 @@ module.exports = function(app) {
 		});
 	});
 
+	app.post('/api/sendRequest/:placeId', function(req, res) {
+		Place.findOne({'_id' : req.params.placeId}, function(err, place) {
+			if (err)
+				console.log(err);
+			else {
+				if (!place)
+					console.log('this card doesnt exist');
+				else {
+					place.interestedPeople.push(req.user.id);
+					place.save();
+					res.send(place);
+				}
+			}
+		});
+	});
+
 	app.get('/api/places', function(req, res) {
 		Place.find(function(err, places) {
 			if (err) {
@@ -251,6 +267,15 @@ module.exports = function(app) {
 				}
 			}
 		})
+	})
+
+	app.get('/api/requests/:id', function(req, res) {
+		Place.find({ 'requester.facebookId' : req.params.id }, function(err, data) {
+			console.log('REQUESTED STUFF IS HERE vvvv');
+			console.log(data); 
+			res.json(data); 
+		});
+
 	})
 
 	//find users that match desired locations

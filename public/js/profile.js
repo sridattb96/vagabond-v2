@@ -1,19 +1,40 @@
 var profile = angular.module('profile', [])
 .controller('ProfileController', ['$scope', '$http', function($scope, $http){
 
+	// $scope.user = {}; 
+	$scope.moment = function(time) {
+        return moment(time).fromNow(); 
+    }
+
+	$('.ui.menu .ui.dropdown').dropdown({
+	  on: 'hover'
+	});
+	$('.ui.menu a.item')
+	  .on('click', function() {
+	    $(this)
+	      .addClass('active')
+	      .siblings()
+	      .removeClass('active')
+	    ;
+	  })
+	;
+
 	$http({
 		method: 'GET',
 		url: 'api/loginInfo',
 		data: {},
 	}).success(function(user){
 		// console.log("FIRSTNAME = " + user.fb._json.first_name);
-		$scope.user = user;
-		$scope.user.firstName = user.fb._json.first_name;
-		$scope.user.lastName = user.fb._json.last_name;
-		$scope.user.occupation = user.occupation;
-		$scope.user.id = user.fb.id
-	});
 
+		$scope.user = user;
+		$http({
+			method: 'GET',
+			url: 'api/requests/' + $scope.user.fb.id,
+			data: {}
+		}).success(function(requests) {
+			$scope.requests = requests;
+		})
+	});
 	
 	// $scope.getInterested = function() {
 	// 	console.log('show interested people');

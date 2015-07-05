@@ -12,8 +12,11 @@ var UserSchema = new Schema({
 	age: Number,
 	city: String,
 	state: String,
-	biography: String,
-	interests: String,
+	biography: {
+		type: String,
+		default: "I like to travel!" 
+	},
+	interests: Array,
 	placesOfInterest: Array
 }, { 
 	minimize: false

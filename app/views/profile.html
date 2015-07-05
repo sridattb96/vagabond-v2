@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Vagabond | Profile</title>
-    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="lib/semantic-ui/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/menu.min.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
+    <script type="text/javascript" src="lib/semantic-ui/dist/components/dropdown.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
     <script src="js/profile.js"></script>
+
 
 </head>
 <style>
+  .tab-body {
+    padding: 20px;
+  }
 
 </style>
 <body ng-controller="ProfileController">
@@ -49,21 +56,22 @@
             <div class="menu">
               <a href=""><div class="item"><i class="send icon"></i> Requests</div></a>
               <a href="/profile"><div class="item"><i class="users icon"></i> Profile</div></a>
-               <a href="/logout"><div class="item"><i class="power icon"></i> Logout</div></a>
+              <a href="/profile-edit"><div class="item"><i class="users icon"></i> Edit Profile</div></a>
+              <a href="/logout"><div class="item"><i class="power icon"></i> Logout</div></a>
               <!-- <div class="divider"></div> -->
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="ui text container">
+    <div class="ui text container" style="margin-bottom: 20px;">
       <div class="ui items">
         <div class="ui item">
           <div class="image">
-            <img class="ui circular image" src="https://graph.facebook.com/{{ user.id }}/picture?height=125&width=125">
+            <img class="ui image" src="https://graph.facebook.com/{{ user.fb.id }}/picture?height=125&width=125">
           </div>
           <div class="content">
-            <a class="header">{{ user.firstName }} {{ user.lastName }}</a>
+            <a class="header">{{ user.fb._json.first_name }} {{ user.fb._json.last_name }}</a>
             <div class="meta">
               <span class="cinema">{{ user.occupation }}</span>
             </div>
@@ -90,52 +98,79 @@
                 <div class="item">
                   <i class="thumbs outline up icon"></i>
                   <div class="content">
-                    <a href="">personalwebsite.com</a>
+                    <button class="ui small button" style="padding: 6px; margin-right: 4px;" ng-repeat="interest in user.interests">
+                      {{ interest }}
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="extra">
+            <!-- <div class="extra">
               <a href="/profile-edit">
                 <div class="ui right floated gray button">
                   Edit Profile
                   <i class="right chevron icon"></i>
                 </div>
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-    
-    <div id="menu" class="ui pointing five item secondary menu">
-      <a class="item active" data-tab="about">About</a>
-      <a class="item" data-tab="interested">Interested</a>
-      <a class="item" data-tab="bonds">Bonds</a>
-      <a class="item" data-tab="gallery">Gallery</a>
-      <a class="item" data-tab="calendar">Calendar</a>
-    </div>
-
-    <div class="ui tab" data-tab="home"> 
-    Home
-    </div>
-    <div class="ui tab active" data-tab="about">
-      <div class="ui item">
-      <a href="/profile-edit">Edit Profile</a> <br>
-        {{ user.firstName }} {{user.lastName }} <br>
-        {{ user.city }}, {{ user.state }} <br>
-        Bio: {{ user.biography }} <br>
-        Interests: {{ user.interests }} 
+    <div class="ui text container">
+      <div id="menu" class="ui pointing three item secondary menu">
+        <a class="item active" data-tab="about">About</a>
+        <a class="item" data-tab="requests">Requests</a>
+        <a class="item" data-tab="messages">Messages</a>
+        <!-- <a class="item" data-tab="gallery">Gallery</a>
+        <a class="item" data-tab="calendar">Calendar</a> -->
       </div>
     </div>
-    <div class="ui tab" data-tab="interested">
-    You have no interested people!
+    
+    
+    <div class="ui text container">
+      <div class="ui tab active" data-tab="about">
+        <div class="tab-body">
+          {{ user.biography }}
+        </div>
+        
+      </div>
+      <div class="ui tab" data-tab="requests">
+        <div class="tab-body">
+          <div class="ui items">
+            <div class="item" ng-repeat="request in requests">
+              <div class="content">
+                <a class="header"> {{ request.name }} </a>
+                <div class="meta">
+                  <span>{{ moment(request.time) }}</span>
+                </div>
+                <div class="description">
+                  <p>{{ request.reason }}</p>
+                </div>
+                <div class="extra">
+                  <div class="ui horizontal list">
+                    <div class="item" ng-repeat="person in request.interestedPeople">
+                      <img class="ui mini circular image" src="https://graph.facebook.com/{{ person }}/picture?height=125&width=125">
+                      <div class="content">
+                        <div class="ui sub header">Sridatt </div>
+                        bich nigga
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="ui tab" data-tab="messages">
+      Messages
+      </div>
+      <!-- <div class="ui tab" data-tab="gallery"> Gallery</div>
+      <div class="ui tab" data-tab="calendar"> Calendar</div> -->
     </div>
-    <div class="ui tab" data-tab="bonds">
-    Bonds
-    </div>
-    <div class="ui tab" data-tab="gallery"> Gallery</div>
-    <div class="ui tab" data-tab="calendar"> Calendar</div>
 
 
 </body>

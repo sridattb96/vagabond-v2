@@ -11,16 +11,17 @@ var profileEdit = angular.module('profile-edit', [])
 		console.log(user)
 		// $scope.fbid = user.fb.id;
 		$scope.user = user;
-		$scope.user.firstName = user.fb._json.first_name;
-		$scope.user.lastName = user.fb._json.last_name;
-		$scope.user.occupation = user.occupation;
-		$scope.user.email = user.fb.email;
 
 	});
 
 	$scope.onSave = function(){
 		$('#saveMsg').show();
 		var userSaveData = $scope.user;
+
+		// userSaveData.interests = $scope.user.interests.splice(',');
+		userSaveData.interests = $scope.user.interests.split(',');
+
+		// console.log('user interested in ' + userSaveData.interests); 
 		var fbid = $scope.user.fb.id;
 		$http({
 			method: 'PUT',
