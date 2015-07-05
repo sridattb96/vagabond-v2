@@ -258,6 +258,37 @@ module.exports = function(app) {
 		})
 	})
 
+	app.post('/api/sendRequest/:placeId', function(req, res){
+		console.log('gets in sendRequest api');
+		Place.findOne({'_id' : req.params.placeId}, function(err, place){
+			if (err)
+				console.log(err)
+			else {
+				if (!place)
+					console.log('this card doesnt exist')
+				else {
+					place.interestedPeople.push(req.user.id);
+					place.save();
+					res.send(place);
+				}
+			}
+		})
+	})
+
+	app.get('/api/seeCurrentInterested/:id', function(req, res){
+		User.findOne({ 'fb.id' : req.params.id}, function(err, user){
+			if (err)
+				console.log(err);
+			else {
+				if (!user){
+					console.log('you dont exist')
+				} else {
+					req.query.id = ''
+				}
+			}
+		})
+	})
+
 	//find users that match desired locations
 	/*
 	app.get('/api/createFeed/:id', function(req, res){

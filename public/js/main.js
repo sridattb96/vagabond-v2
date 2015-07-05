@@ -13,7 +13,25 @@ function mainController($scope, $http) {
 
     $scope.placeData = {};
 
+    //$scope.modalData = {};
+
+    $scope.placeId = {};
+
+    $scope.sendRequest = function() {
+        var placeId = $scope.placeId;
+        $http({
+            method: 'POST',
+            url: '/api/sendRequest/' + placeId,
+            data: {}
+        }).success(function(data){
+            console.log('new place object: ')
+            console.log(data);
+        });
+    }
+
     $scope.seePlace = function(place) {
+
+        $scope.placeId = place._id;
 
         $('.ui.modal')
           .modal({

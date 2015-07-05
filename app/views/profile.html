@@ -32,8 +32,9 @@
         </div>
     </h2>
     
-    <div id="menu" class="ui pointing four item menu">
+    <div id="menu" class="ui pointing five item menu">
       <a class="item active" data-tab="about">About</a>
+      <a class="item" data-tab="interested">Interested</a>
       <a class="item" data-tab="bonds">Bonds</a>
       <a class="item" data-tab="gallery">Gallery</a>
       <a class="item" data-tab="calendar">Calendar</a>
@@ -51,6 +52,9 @@
         Interests: {{ user.interests }} 
       </div>
     </div>
+    <div class="ui tab" data-tab="interested">
+    You have no interested people!
+    </div>
     <div class="ui tab" data-tab="bonds">
     Bonds
     </div>
@@ -60,8 +64,9 @@
 
 </body>
   <script type="text/javascript">
-  $(document).ready(function(){
-      $('.menu .item').tab();
-  })
+    $(document).ready(function(){
+        $('.menu .item').tab();
+        getInterested();
+    })
     </script>
 </html>

@@ -14,7 +14,9 @@ var profile = angular.module('profile', [])
 		$scope.user.id = user.fb.id
 	});
 
-
-
+	
+	$scope.getInterested = function() {
+		console.log('show interested people');
+	}
 	
 }]);
