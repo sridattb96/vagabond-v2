@@ -8,13 +8,12 @@ var config = require('./config'),
 	// compress = require('compression'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
-	session = require('express-session')
+	session = require('express-session');
 
 // Define the Express configuration method
 module.exports = function() {
 	var app = express(); 
 	// Create a new Express application instance
-	
 
 	// Use the 'NDOE_ENV' variable to activate the 'morgan' logger or 'compress' middleware
 	if (process.env.NODE_ENV === 'development') {
@@ -47,6 +46,8 @@ module.exports = function() {
 
 	// Configure static file serving
 	app.use(express.static('./public'));
+
+
 
 	// Return the Express application instance
 	return app;

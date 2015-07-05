@@ -7,3 +7,6 @@
 * push notifications / messages on successful profile edit
 * rating system for traveling companion
 * if 0 results, add a place
+
+* calendar, to show dates of travel
+* 

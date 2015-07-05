@@ -9,8 +9,17 @@ var passport = require('passport'),
 var Place = mongoose.model('Place'),
 	User = mongoose.model('User');
 
+
 // Define the routes module' method
 module.exports = function(app) {
+
+	// -- SOCKET IO, REFACTOR LATER
+	var server = require('http').createServer(app).listen(3000);
+	var io = require('socket.io').listen(server);
+
+	io.on('connection', function(socket){
+	  console.log('a user connected');
+	});
 
 	passport.serializeUser(function(user, done) {
 	  done(null, user);
@@ -80,14 +89,8 @@ module.exports = function(app) {
 		// next();
 	})
 
-	app.get('/test', function(req, res) {
-		var token; 
-		User.findOne({ 'fb.id' : req.user.id }, function (err, user) {
-			token = user.accessToken; 
-
-		})
-		var url = 'https://graph.facebook.com/v2.3/10207005009189990?fields=context.fields%28mutual_friends%29&access_token=' + token; 
-		res.redirect(url);
+	app.get('/socket', function(req, res) {
+		res.render('socket.html');
 	})
 
 

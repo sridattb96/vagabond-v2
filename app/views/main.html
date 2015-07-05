@@ -15,7 +15,9 @@
     <link rel="stylesheet" type="text/css" href="lib/semantic-ui/dist/components/site.min.css">
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="lib/moment/min/moment.min.js"></script>
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
@@ -178,7 +180,7 @@
 			    </div>
 			    <div class="extra content">
 			      <span class="right floated">
-			        Time Since
+			        {{ moment(place.time) }}
 			      </span>
 			      <span class="left floated">
 			        <i class="user icon"></i>
