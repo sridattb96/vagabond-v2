@@ -9,4 +9,4 @@
 * if 0 results, add a place
 
 * calendar, to show dates of travel
-* 
+* each place has own message ID

@@ -19,6 +19,16 @@ var profile = angular.module('profile', [])
 	  })
 	;
 
+	// $scope.find = function(person) {
+	// 	$http({
+	// 		method: 'GET',
+	// 		url: 'api/user/' + person,
+	// 		data: {},
+	// 	}).success(function(user) {
+	// 		return user; 
+	// 	})
+	// }
+
 	$http({
 		method: 'GET',
 		url: 'api/loginInfo',
