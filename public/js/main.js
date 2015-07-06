@@ -37,7 +37,7 @@ function mainController($scope, $http) {
 
         $scope.placeId = place._id;
 
-        $('.ui.modal')
+        $('.card-modal')
           .modal({
             blurring: true
           })
@@ -73,6 +73,15 @@ function mainController($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
+
+    $scope.addPlaceModal = function() {
+        $('.add-place-modal')
+          .modal({
+            blurring: true
+          })
+          .modal('show')
+        ;
+    }
 
     $scope.addPlace = function(){
         $scope.place.name = document.getElementById('placeName').value;

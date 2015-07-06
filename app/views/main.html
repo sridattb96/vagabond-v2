@@ -27,11 +27,15 @@
     <script src="js/main.js"></script>
 
     <style>
+    .add-place-modal {
+    	padding: 20px;
+    }
     #banner-container {
     	background: url('https://download.unsplash.com/photo-1428263197823-ce6a8620d1e1');
     	background-size: cover;
     	background-attachment: fixed;
-    	padding-top: 5.5em;
+    	padding-top: 4em;
+    	margin-bottom:45px;
     }
     .ui.text.container {
       max-width: 950px !important;
@@ -58,11 +62,12 @@
     .main.menu .item img.logo {
       margin-right: 1.5em;
     }
-
-    .main.menu.fixed {
-      background-color: #FFFFFF;
-      border: 1px solid #DDD;
-      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    .navbar {
+    	box-shadow: 1px 1px whitesmoke;
+    	background-color: white;
+    	padding: 10px;
+    	border-radius:50px;
+    	margin-bottom:-40px;
     }
 
     </style>
@@ -74,63 +79,42 @@
 
 	<div id="banner-container">
 
-		<div class="ui main text container">
-		  <h1 class="ui header">Feed</h1>
-		  <p>This example shows how to use lazy loaded images, a sticky menu, and a simple text container</p>
-		  <br>
-		  <br>
-		</div>
+		
 
 
 		<div class="ui borderless secondary menu">
-		  <div class="ui text container">
+		  <div class="ui text container navbar">
 		    <div href="#" class="header item">
-		      <img class="logo" src="assets/images/logo.png">
+		      <img class="logo" src="img/logo.png">
 		      Vagabond
 		    </div>
-		    <a href="#" class="item">Home</a>
+		    <a href="#" class="item">Feed</a>
 		    <div class="right menu">
-		      <div class="item">
-		        <div class="ui search">
-		          <div class="ui icon input">
-		            <input class="prompt" type="text" placeholder="Search places..." ng-model="query">
-		            <i class="search icon"></i>
-		          </div>
-		          <div class="results"></div>
-		        </div>
-		      </div>
 		      <div class="ui dropdown item">
-		        <img src="https://graph.facebook.com/{{ loginInfo.fb.id }}/picture?height=100&width=100"/> 
-		        &nbsp;
-		        <!-- {{ loginInfo.fb.displayName }} -->
+		        My Profile
+		        
+		        
 		        <i class="dropdown icon"></i>
 		        <div class="menu">
+		        	<a href="">
+			        	<div class="item" style="padding: 5px;">
+		        			<img src="https://graph.facebook.com/{{ loginInfo.fb.id }}/picture?height=40&width=40"/> 
+
+		        			&nbsp;<b>{{ loginInfo.fb.name.givenName }}</b>
+			        			
+			        		
+			        		
+			        	</div>
+			        </a>
+		        	<div class="divider"></div>
 		          	<a href=""><div class="item"><i class="send icon"></i> Requests</div></a>
-		          	<a href="/profile"><div class="item"><i class="users icon"></i> Profile</div></a>
+		          	<a href="/profile"><div class="item"><i class="users icon"></i> View Profile</div></a>
 		          	<a href="/profile-edit"><div class="item"><i class="users icon"></i> Edit Profile</div></a>
 		          	<a href="/logout"><div class="item"><i class="power icon"></i> Logout</div></a>
-		          	<!-- <div class="divider"></div> -->
+		          	
 		        </div>
 		      </div>
 		    </div>
-		    <!-- <a href="#" class="ui right floated dropdown item">
-		      Dropdown <i class="dropdown icon"></i>
-		      <div class="menu">
-		        <div class="item">Link Item</div>
-		        <div class="item">Link Item</div>
-		        <div class="divider"></div>
-		        <div class="header">Header Item</div>
-		        <div class="item">
-		          <i class="dropdown icon"></i>
-		          Sub Menu
-		          <div class="menu">
-		            <div class="item">Link Item</div>
-		            <div class="item">Link Item</div>
-		          </div>
-		        </div>
-		        <div class="item">Link Item</div>
-		      </div>
-		    </a> -->
 		  </div>
 		</div>
 	</div>
@@ -142,14 +126,22 @@
 		<!-- <div ng-include src="'partials/navbar.html'"></div> -->
 		
 		<form name="placeForm" class="ui form">
-			<div class="three fields">
+			<div class="four fields" style="">
+
+			    
+			    <button ng-click="addPlaceModal()" class="ui labeled icon button">
+			      <i class="plus icon"></i>
+			      Add a Place
+			    </button>
 			    <div class="field">
-			      <input type="text" id="placeName" ng-model="place.name" placeholder="Place"> 
+			    	<div class="ui search">
+			    	  <div class="ui icon input">
+			    	    <input class="prompt" type="text" placeholder="Search places..." ng-model="query">
+			    	    <i class="search icon"></i>
+			    	  </div>
+			    	  <div class="results"></div>
+			    	</div>
 			    </div>
-			    <div class="field">
-			      <input type="text" ng-model="place.reason" placeholder="Why">
-			    </div>
-			    <div ng-click="addPlace()" class="ui submit button">Add</div> 
 			    <div class="inline field">
 			      	<select ng-model="orderProp" class="ui search dropdown" >
 				      	<option value="-time">Most Recent</option>
@@ -157,10 +149,45 @@
 				      	<option value="name">Name of Place</option>
 				      	<option value="">Mutual Interests</option>
 			    	</select>
-			    	<label><b>{{ (places | filter: query).length }}</b> Results</label>
+			    	<label><b>&nbsp;{{ (places | filter: query).length }}</b> Results</label>
 			    </div>
+			    <!-- <div class="field">
+		          <div class="ui toggle checkbox">
+		            <input type="checkbox" name="" tabindex="0" class="hidden">
+		            <label>Ride Share</label>
+		          </div>
+			    </div> -->
+
+			    <div class="ui modal add-place-modal" aria-hidden="true">
+			    	<div class="ui fluid form">
+			    		<h4 class="ui dividing header">Add a Place</h4>
+			    	  	<div class="two fields">
+				    	  	<div class="required field">
+				    	      <label>Traveling From:</label>
+				    	      <input type="text" placeholder="Starting Place"> 
+				    	    </div>
+				    	    <div class="required field">
+				    	      <label>To:</label>
+				    	      <input type="text" id="placeName" ng-model="place.name" placeholder="Destination"> 
+				    	    </div>
+			    	 	</div>
+			    	  	<div class="required field">
+			    	      	<label>Reason</label>
+			    	      	<input type="text" ng-model="place.reason" placeholder="Why">
+			    	      	
+			    	    </div>
+			    	    <a href="#" ng-click="addPlace()">
+			    	    	<div class="ui submit button">Submit</div>
+			    	    </a>
+				    	  
+			    	</div>
+			    	
+			    </div>
+			    <!-- <div ng-click="addPlace()" class="ui submit button">Add</div>  -->
+			    
 				
 			</div>
+			
 		</form>
 
 		<br>
@@ -184,12 +211,12 @@
 			        {{ moment(place.time) }}
 			      </span>
 			      <span class="left floated">
-			        <i class="user icon"></i>
-			        Mutual Friends
+			        <i class="money icon"></i>
+			        Price
 			      </span>
 			    </div>
 
-			    <div class="ui modal" aria-hidden="true">
+			    <div class="ui modal card-modal" aria-hidden="true">
 			    	<div class="item">
 			    	<div class="header">
 			    		{{ modalData.fb._json.name }}
