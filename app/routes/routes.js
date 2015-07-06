@@ -21,10 +21,18 @@ module.exports = function(app) {
 	  done(null, obj);
 	});
 
+	var url; 
+	if (process.env.NODE_ENV === 'development') {
+		url = "http://localhost:8081/auth/facebook/callback";
+	}
+	else {
+		url = "/auth/facebook/callback"
+	}
+
 	passport.use(new FacebookStrategy({
 	    clientID: 886471691414676,
 	    clientSecret: "4aeb8bae912f2de14a64e685f7ec59a0",
-	    callbackURL: "http://localhost:8081/auth/facebook/callback",
+	    callbackURL: url,
 	    enableProof: false
 	  },
 	  function(accessToken, refreshToken, profile, done) {
