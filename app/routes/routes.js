@@ -95,8 +95,8 @@ module.exports = function(app) {
 
 
 	app.get('/', function(req, res) {
-		console.log('HI HERE U GO');
-		console.log(req.user);
+		// console.log('HI HERE U GO');
+		// console.log(req.user);
 		if (req.user) {
 			res.render('main.html');
 		}
@@ -129,7 +129,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/loginInfo', function(req, res) {
-		console.log(req.user);
+		// console.log(req.user);
 		User.findOne({ 'fb.id' : req.user.id }, function(err, user) {
 			if (err)
 				next(err);
@@ -238,7 +238,6 @@ module.exports = function(app) {
 	});
 	
 	app.put('/api/saveInfo/:id', function(req, res){
-		console.log('req.body')
 		User.findOne({ 'fb.id': req.params.id}, function(err, user){
 			if (err)
 				console.log(err);
@@ -247,6 +246,8 @@ module.exports = function(app) {
 					console.log('you dont exist');
 				}
 				else {
+					console.log('found user'); 
+
 					user.fb.email = req.body.email;
 					user.age = req.body.age;
 					user.occupation = req.body.occupation;
@@ -259,7 +260,6 @@ module.exports = function(app) {
 					user.save();
 				}
 			}
-			console.log(user);
 		});
 	});
 
@@ -279,8 +279,8 @@ module.exports = function(app) {
 
 	app.get('/api/requests/:id', function(req, res) {
 		Place.find({ 'requester.facebookId' : req.params.id }, function(err, data) {
-			console.log('REQUESTED STUFF IS HERE vvvv');
-			console.log(data); 
+			// console.log('REQUESTED STUFF IS HERE vvvv');
+			// console.log(data); 
 			res.json(data); 
 		});
 

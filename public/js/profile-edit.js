@@ -15,6 +15,7 @@ var profileEdit = angular.module('profile-edit', [])
 	});
 
 	$scope.onSave = function(){
+		console.log('on save function called!');
 		$('#saveMsg').show();
 		var userSaveData = $scope.user;
 

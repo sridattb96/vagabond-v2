@@ -1,11 +1,41 @@
 var profile = angular.module('profile', [])
 .controller('ProfileController', ['$scope', '$http', function($scope, $http){
 
+	$scope.editProfileModal = function(){
+		$('.edit-profile-modal')
+          .modal({
+            blurring: true
+          })
+          .modal('show')
+        ;
+	}
+
+	$scope.saveProfile = function(){
+		$('#saveMsg').show();
+		var userSaveData = $scope.user;
+
+		// userSaveData.interests = $scope.user.interests.splice(',');
+		userSaveData.interests = $scope.user.interests.split(',');
+
+		// console.log('user interested in ' + userSaveData.interests); 
+		var fbid = $scope.user.fb.id;
+		$http({
+			method: 'PUT',
+			url: '/api/saveInfo/' + fbid,
+			data: userSaveData
+		}).success(function(data){
+			console.log(data);
+		}).error(function(data) {
+            console.log('Error: ' + data);
+        });
+
+        $('.edit-profile-modal').hide();
+	};
+
 	// $scope.user = {}; 
 	$scope.moment = function(time) {
         return moment(time).fromNow(); 
     }
-
 	$('.ui.menu .ui.dropdown').dropdown({
 	  on: 'hover'
 	});
