@@ -226,15 +226,8 @@ module.exports = function(app) {
 	});
 
 	//user profile information
-
-	app.get('/profile-edit', function(req, res){
-		res.render('profile-edit.html');
-	});
-
 	app.get('/profile', function(req, res){
-		res.render('profile.html', { 
-			// picture: 'https://graph.facebook.com/' + req.user.id + '/picture?height=100&width=100'
-		});
+		res.render('profile.html');
 	});
 	
 	app.put('/api/saveInfo/:id', function(req, res){
