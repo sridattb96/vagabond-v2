@@ -1,0 +1,204 @@
+<!doctype html>
+<html ng-app="profile-view">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Vagabond | Profile</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/lib/semantic-ui/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/lib/semantic-ui/dist/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="/lib/semantic-ui/dist/components/menu.min.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.3/semantic.min.js"></script>
+    <script type="text/javascript" src="/lib/semantic-ui/dist/components/dropdown.js"></script>
+    <script src="/lib/moment/min/moment.min.js"></script>
+    <script src="/js/profile-view.js"></script>
+
+
+</head>
+<style>
+
+  .tab-body {
+    padding: 20px;
+  }
+  #banner-container {
+    background: url('https://download.unsplash.com/photo-1428263197823-ce6a8620d1e1');
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 4em;
+    margin-bottom:100px;
+  }
+  .ui.text.container {
+    max-width: 950px !important;
+  }
+
+  div.ui.borderless.main.menu {
+    background-color: transparent;
+  }
+  .ui.borderless.main.menu.fixed {
+    background-color: white;
+  }
+  
+  .main.menu {
+    /*margin-top: 0em;*/
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    transition:
+      box-shadow 1s ease-in-out,
+      padding 1s ease-in-out,
+      background 0.25s ease-in-out
+    ;
+  }
+  .main.menu .item img.logo {
+    margin-right: 1.5em;
+  }
+  .navbar {
+    box-shadow: 1px 1px whitesmoke;
+    background-color: white;
+    padding: 10px;
+    border-radius:50px;
+    margin-bottom:-40px;
+  }
+
+</style>
+<body ng-controller="ProfileViewController" ng-init="profile = <%= JSON.stringify(profile) %>; requests = <%= JSON.stringify(requests) %>">
+  <div id="banner-container">
+
+    <div class="ui borderless secondary menu">
+      <div class="ui text container navbar">
+        <div href="#" class="header item">
+          <img class="logo" src="/img/logo.png">
+          Vagabond
+        </div>
+        <a href="/main" class="item">Feed</a>
+        <div class="right menu">
+          <div class="ui dropdown item">
+            My Profile
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a href="">
+                <div class="item" style="padding: 5px;">
+                  <img src="https://graph.facebook.com/<%= profile.fb.id %>/picture?height=40&width=40"/> 
+
+                  &nbsp;<b><%= profile.fb.name.givenName %></b>
+                    
+                  
+                  
+                </div>
+              </a>
+              <div class="divider"></div>
+                <a href=""><div class="item"><i class="send icon"></i> Requests</div></a>
+                <a href="/profile"><div class="item"><i class="users icon"></i> View Profile</div></a>
+                <a href="/logout"><div class="item"><i class="power icon"></i> Logout</div></a>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   
+    <div class="ui text container" style="margin-bottom: 20px;">
+      <div class="ui items">
+        <div class="ui item">
+          <div class="image">
+            <img class="ui image" src="https://graph.facebook.com/{{ profile.fb.id }}/picture?height=400&width=400">
+          </div>
+          <div class="content">
+            <a class="header">{{ profile.fb._json.first_name }} {{ profile.fb._json.last_name }}</a>
+            <div class="meta">
+              <span class="cinema"><%= profile.occupation %></span>
+            </div>
+            <div class="description">
+
+              <div class="ui list">
+                <div class="item">
+                  <i class="marker icon"></i>
+                  <div class="content">
+                    <%= profile.city %>, <%= profile.state %>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="mail icon"></i>
+                  <div class="content">
+                    <a href="mailto:<%= profile.fb._json.email %>"><%= profile.fb._json.email %></a>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="linkify icon"></i>
+                  <div class="content">
+                    <a href="">personalwebsite.com</a>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="thumbs outline up icon"></i>
+                  <div class="content">
+                    <button class="ui small button" style="padding: 6px; margin-right: 4px;" ng-repeat="interest in profile.interests">
+                      {{ interest }}
+                    </button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui text container">
+      <div id="menu" class="ui pointing two item secondary menu">
+        <a class="item active" data-tab="about">About</a>
+        <a class="item" data-tab="requests">Requests</a>
+        <!-- <a class="item" data-tab="gallery">Gallery</a>
+        <a class="item" data-tab="calendar">Calendar</a> -->
+      </div>
+    </div>
+    
+    
+    <div class="ui text container">
+      <div class="ui tab active" data-tab="about">
+        <div class="tab-body">
+          <%= profile.biography %>
+        </div>
+        
+      </div>
+      <div class="ui tab" data-tab="requests">
+        <div class="tab-body">
+          <div class="ui items">
+            <div class="item" ng-repeat="request in requests">
+              <div class="content">
+                <a class="header"> {{ request.name }} </a>
+                <div class="meta">
+                  <span>{{ moment(request.time) }}</span>
+                </div>
+                <div class="description">
+                  <p>{{ request.reason }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- <div class="ui tab" data-tab="gallery"> Gallery</div>
+      <div class="ui tab" data-tab="calendar"> Calendar</div> -->
+    </div>
+
+
+
+
+</body>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('.menu .item').tab();
+    })
+    </script>
+</html>

@@ -270,6 +270,28 @@ module.exports = function(app) {
 		})
 	})
 
+	app.get('/profile/:id', function(req, res) {
+		User.findOne({ 'fb.id' : req.params.id}, function(err, user){
+			if (err)
+				console.log(err);
+			else {
+				if (!user){
+					console.log('you dont exist')
+				} else {
+					Place.find({ 'requester.facebookId' : req.params.id }, function(err, data) {
+						// console.log('REQUESTED STUFF IS HERE vvvv');
+						// console.log(data); 
+						res.render('profile-view.ejs', {
+							profile: user,
+							requests: data
+						});
+					});
+				}
+			}
+		})
+
+	})
+
 	app.get('/api/requests/:id', function(req, res) {
 		Place.find({ 'requester.facebookId' : req.params.id }, function(err, data) {
 			// console.log('REQUESTED STUFF IS HERE vvvv');

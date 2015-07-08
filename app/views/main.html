@@ -193,7 +193,7 @@
 
 		<br>
 		
-		<div class="ui link cards" >
+		<div class="ui link four cards" >
 		  <div class="card" ng-repeat="place in places | filter: query | orderBy: orderProp " ng-click="seePlace(place)">
 		    <div class="image">
 		      <img src="https://graph.facebook.com/{{ place.requester.facebookId }}/picture?height=500&width=600">
@@ -201,7 +201,7 @@
 			    <div class="content">
 			      <div class="header">{{ place.name }}</div>
 			      <div class="meta">
-			        <a>{{ place.requester.name }}</a>
+			        <a href="/profile/{{ place.requester.facebookId }}">{{ place.requester.name }}</a>
 			      </div>
 			      <div class="description">
 			        {{ place.reason }}
